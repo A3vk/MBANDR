@@ -6,27 +6,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.lifecycle.Observer
 import com.example.mypokedexapp.R
 
 class PokedexFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = PokedexFragment()
-    }
-
-    private lateinit var viewModel: PokedexViewModel
+    private lateinit var pokedexViewModel: PokedexViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.pokedex_fragment, container, false)
+        pokedexViewModel =
+                ViewModelProvider(this).get(PokedexViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_pokedex, container, false)
+        val textView: TextView = root.findViewById(R.id.text_pokedex)
+        pokedexViewModel.text.observe(viewLifecycleOwner, Observer {
+            textView.text = it
+        })
+        return root
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(PokedexViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

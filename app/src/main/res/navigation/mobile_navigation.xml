@@ -3,23 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_pokedex">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.mypokedexapp.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_pokedex"
+        android:name="com.example.mypokedexapp.ui.pokedex.PokedexFragment"
+        android:label="@string/title_pokedex"
+        tools:layout="@layout/fragment_pokedex" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.mypokedexapp.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_team"
+        android:name="com.example.mypokedexapp.ui.team.TeamFragment"
+        android:label="@string/title_team"
+        tools:layout="@layout/fragment_team" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.mypokedexapp.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_profile"
+        android:name="com.example.mypokedexapp.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.mypokedexapp.ui.settings.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_settings" />
+
 </navigation>
