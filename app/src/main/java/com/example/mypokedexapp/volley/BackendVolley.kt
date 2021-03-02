@@ -21,7 +21,7 @@ class BackendVolley : Application() {
             private set
     }
 
-    private  val requestQueue: RequestQueue by lazy {
+    private val requestQueue: RequestQueue by lazy {
         Volley.newRequestQueue(applicationContext)
     }
 
@@ -29,6 +29,7 @@ class BackendVolley : Application() {
         requestQueue.add(req)
     }
 
+    // TODO: Check if needed and how used
     val imageLoader: ImageLoader by lazy {
         ImageLoader(requestQueue, object: ImageLoader.ImageCache {
             private val cache = LruCache<String, Bitmap>(20)

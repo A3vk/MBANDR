@@ -95,5 +95,4 @@ object RouterVolley {
 
     // Utility
     const val LANGUAGE = "${URL}language/"
-
 }

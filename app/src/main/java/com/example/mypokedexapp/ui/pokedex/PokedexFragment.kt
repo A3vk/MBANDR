@@ -19,7 +19,7 @@ class PokedexFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_pokedex, container, false)
         val textView: TextView = root.findViewById(R.id.text_pokedex)
         pokedexViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = getString(R.string.base)
+            textView.text = it
         })
         return root
     }
