@@ -14,17 +14,12 @@ class PokedexFragment : Fragment() {
 
     private lateinit var pokedexViewModel: PokedexViewModel
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        pokedexViewModel =
-                ViewModelProvider(this).get(PokedexViewModel::class.java)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        pokedexViewModel = ViewModelProvider(this).get(PokedexViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_pokedex, container, false)
         val textView: TextView = root.findViewById(R.id.text_pokedex)
         pokedexViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+            textView.text = getString(R.string.base)
         })
         return root
     }
