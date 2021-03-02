@@ -10,7 +10,9 @@ class PokedexViewModel : ViewModel() {
     private val pokemonRepository = PokemonRepository()
 
     private val _text = MutableLiveData<String>().apply {
-        val pokemon = pokemonRepository.getPokemon()
+        val pokemon = pokemonRepository.getPokemon { onComplete ->
+            value = onComplete[0].name
+        }
         value = "This is pokedex Fragment"
     }
     val text: LiveData<String> = _text
