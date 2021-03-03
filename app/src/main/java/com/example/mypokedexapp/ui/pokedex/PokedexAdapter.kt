@@ -15,7 +15,7 @@ class PokedexAdapter (private val pokemon: ArrayList<Pokemon>) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-        holder.pokemonId.text = "KAAS"
+        holder.pokemonId.text = pokemon[position].id.toString()
     }
 
     override fun getItemCount() = pokemon.size
