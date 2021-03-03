@@ -1,7 +1,7 @@
 package com.example.mypokedexapp.repositories
 
 import com.example.mypokedexapp.models.Pokemon
-import com.example.mypokedexapp.volley.RouterVolley
+import com.example.mypokedexapp.values.Endpoints
 import com.example.mypokedexapp.volley.ServiceVolley
 
 class PokemonRepository {
@@ -9,7 +9,7 @@ class PokemonRepository {
 
     fun getPokemon(completionHandler: (onComplete: ArrayList<Pokemon>) -> Unit){
         val pokemon = ArrayList<Pokemon>()
-        service.get(RouterVolley.Pokemon.BASE) { response ->
+        service.get(Endpoints.Pokemon.BASE) { response ->
             if (response != null) {
                 val result = response.getJSONArray("results")
                 for (index in 0 until result.length()) {

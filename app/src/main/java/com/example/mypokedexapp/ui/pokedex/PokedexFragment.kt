@@ -20,8 +20,7 @@ class PokedexFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        pokedexViewModel =
-            ViewModelProvider(this).get(PokedexViewModel::class.java)
+        pokedexViewModel = ViewModelProvider(this).get(PokedexViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_pokedex, container, false)
         val recyclerview: RecyclerView = root.findViewById(R.id.recycler_view_pokemon)
         pokedexViewModel.pokemon.observe(viewLifecycleOwner, Observer { pokemon ->
