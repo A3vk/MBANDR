@@ -8,12 +8,7 @@ import com.example.mypokedexapp.R
 import com.example.mypokedexapp.databinding.RecyclerviewPokemonBinding
 import com.example.mypokedexapp.models.Pokemon
 
-class PokemonAdapter (
-    private val pokemon: List<Pokemon>
-    ) : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
-
-    override fun getItemCount() = pokemon.size
-
+class PokedexAdapter (private val pokemon: ArrayList<Pokemon>) : RecyclerView.Adapter<PokedexAdapter.PokemonViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder =
         PokemonViewHolder(
             DataBindingUtil.inflate(
@@ -28,9 +23,7 @@ class PokemonAdapter (
         holder.recyclerviewPokemonBinding.pokemon = this.pokemon[position]
     }
 
+    override fun getItemCount() = pokemon.size
 
-    inner class PokemonViewHolder(
-        val recyclerviewPokemonBinding: RecyclerviewPokemonBinding
-    ) : RecyclerView.ViewHolder(recyclerviewPokemonBinding.root)
-
+    inner class PokemonViewHolder(val recyclerviewPokemonBinding: RecyclerviewPokemonBinding) : RecyclerView.ViewHolder(recyclerviewPokemonBinding.root)
 }

@@ -28,7 +28,7 @@ class PokedexFragment : Fragment() {
             recyclerview.also{
                 it.layoutManager = LinearLayoutManager(requireContext())
                 it.setHasFixedSize(true)
-                it.adapter = PokemonAdapter(pokemon)
+                it.adapter = PokedexAdapter(pokemon)
             }
         })
         return root
