@@ -23,9 +23,309 @@
         android:id="@+id/pokemonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/placeholder"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pokemonImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pokemonId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/placeholder"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="233dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pokemonImage"
+        app:layout_constraintTop_toBottomOf="@+id/pokemonName" />
+
+    <LinearLayout
+        android:id="@+id/pokemonTypes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemonImage">
+
+        <TextView
+            android:id="@+id/pokemonType1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ff0000"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="@string/placeholder"
+            android:textAlignment="center"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="199dp" />
+
+        <Space
+            android:layout_width="50dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/pokemonType2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ff0000"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="@string/placeholder"
+            android:textAlignment="center"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="199dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemonTypes">
+
+        <LinearLayout
+            android:id="@+id/pokemonStatHp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemonImage">
+
+            <TextView
+                android:id="@+id/pokemonStatHpTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/placeholder"
+                android:textAlignment="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+            <TextView
+                android:id="@+id/pokemonStatHpValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/placeholder"
+                android:textAlignment="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+            <ProgressBar
+                android:id="@+id/pokemonStatHpBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pokemonAttack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemonImage">
+            <TextView
+                android:id="@+id/pokemonStatAttackTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/placeholder"
+                android:textAlignment="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+            <TextView
+                android:id="@+id/pokemonStatAttackValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/placeholder"
+                android:textAlignment="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+            <ProgressBar
+                android:id="@+id/pokemonStatAttackBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pokemonDefence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemonImage">
+            <TextView
+                android:id="@+id/pokemonStatDefenceTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/placeholder"
+                android:textAlignment="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+            <TextView
+                android:id="@+id/pokemonStatDefenceValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/placeholder"
+                android:textAlignment="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+            <ProgressBar
+                android:id="@+id/pokemonStatDefenceBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pokemonSpecialAttack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemonImage">
+            <TextView
+                android:id="@+id/pokemonStatSpecialAttackTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/placeholder"
+                android:textAlignment="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+            <TextView
+                android:id="@+id/pokemonStatSpecialAttackValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/placeholder"
+                android:textAlignment="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+            <ProgressBar
+                android:id="@+id/pokemonStatSpecialAttackBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pokemonSpecialDefence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemonImage">
+            <TextView
+                android:id="@+id/pokemonStatSpecialDefenceTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/placeholder"
+                android:textAlignment="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+            <TextView
+                android:id="@+id/pokemonStatSpecialDefenceValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/placeholder"
+                android:textAlignment="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+            <ProgressBar
+                android:id="@+id/pokemonStatSpecialDefenceBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pokemonSpeed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemonImage">
+            <TextView
+                android:id="@+id/pokemonStatSpeedTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/placeholder"
+                android:textAlignment="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+            <TextView
+                android:id="@+id/pokemonStatSpeedValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/placeholder"
+                android:textAlignment="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+            <ProgressBar
+                android:id="@+id/pokemonStatSpeedBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
