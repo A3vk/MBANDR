@@ -15,10 +15,8 @@ class PokemonRepository {
                 for (index in 0 until result.length()) {
                     service.get(result.getJSONObject(index).getString("url")) { pokemonJson ->
                         if (pokemonJson != null) {
-                            pokemon.add(Pokemon().fromJson(pokemonJson))
-                            if(pokemon.count() == result.length()) {
-                                completionHandler(pokemon)
-                            }
+                            pokemon.add(Pokemon.fromJson(pokemonJson))
+                            completionHandler(pokemon)
                         }
                     }
                 }

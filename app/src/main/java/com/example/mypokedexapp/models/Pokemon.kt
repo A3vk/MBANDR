@@ -2,15 +2,15 @@ package com.example.mypokedexapp.models
 
 import org.json.JSONObject
 
-class Pokemon {
-    lateinit var id: Number
-    lateinit var name: String
-    lateinit var imageUrl: String
-
-    fun fromJson(json: JSONObject): Pokemon {
-        id = json.getInt("id")
-        name = json.getString("name")
-        imageUrl = json.getJSONObject("sprites").getString("front_default")
-        return this
+data class Pokemon(var id: Number, var name: String, var imageUrl: String, var stats : PokemonStats) {
+    companion object {
+        fun fromJson(json: JSONObject): Pokemon {
+            return Pokemon(
+                json.getInt("id"),
+                json.getString("name"),
+                json.getJSONObject("sprites").getString("front_default"),
+                PokemonStats.fromJson(json.getJSONArray("stats"))
+            )
+        }
     }
 }
