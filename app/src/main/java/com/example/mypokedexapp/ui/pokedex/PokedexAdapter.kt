@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mypokedexapp.R
 import com.example.mypokedexapp.models.Pokemon
 
-class PokedexAdapter (private val pokemon: ArrayList<Pokemon>) : RecyclerView.Adapter<PokedexAdapter.PokemonViewHolder>() {
+class PokedexAdapter (private val pokemon: ArrayList<Pokemon>, private val listener: OnItemClickListener) : RecyclerView.Adapter<PokedexAdapter.PokemonViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_pokemon, parent, false)
         return PokemonViewHolder(view)
@@ -20,7 +20,22 @@ class PokedexAdapter (private val pokemon: ArrayList<Pokemon>) : RecyclerView.Ad
 
     override fun getItemCount() = pokemon.size
 
-    inner class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val pokemonId: TextView = itemView.findViewById(R.id.pokemonId)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if(position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 }

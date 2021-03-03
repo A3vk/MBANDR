@@ -7,12 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.mypokedexapp.R
+import com.example.mypokedexapp.models.Pokemon
 
-class PokemonDetail : Fragment() {
-
-    companion object {
-        fun newInstance() = PokemonDetail()
-    }
+class PokemonDetailFragment : Fragment() {
 
     private lateinit var viewModel: PokemonDetailViewModel
 
@@ -20,13 +17,14 @@ class PokemonDetail : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.pokemon_detail_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_pokemon_detail, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(PokemonDetailViewModel::class.java)
-        // TODO: Use the ViewModel
+        val pokemon = arguments?.get("pokemon") as Pokemon
+        println(pokemon.name)
     }
 
 }

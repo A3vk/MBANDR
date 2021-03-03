@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypokedexapp.R
 
-class PokedexFragment : Fragment() {
+class PokedexFragment : Fragment(), PokedexAdapter.OnItemClickListener {
 
     private lateinit var pokedexViewModel: PokedexViewModel
 
@@ -27,9 +29,14 @@ class PokedexFragment : Fragment() {
             recyclerview.also{
                 it.layoutManager = LinearLayoutManager(requireContext())
                 it.setHasFixedSize(true)
-                it.adapter = PokedexAdapter(pokemon)
+                it.adapter = PokedexAdapter(pokemon, this)
             }
         })
         return root
+    }
+
+    override fun onItemClick(position: Int) {
+        val clickedPokemon = pokedexViewModel.pokemon.value?.get(position)
+        findNavController().navigate(R.id.action_navigation_pokedex_to_pokemonDetailFragment, bundleOf("pokemon" to clickedPokemon))
     }
 }

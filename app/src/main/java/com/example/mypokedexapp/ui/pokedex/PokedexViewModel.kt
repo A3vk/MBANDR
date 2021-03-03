@@ -10,7 +10,7 @@ class PokedexViewModel : ViewModel() {
     private val pokemonRepository = PokemonRepository()
 
     private val _pokemon = MutableLiveData<ArrayList<Pokemon>>().apply{
-        pokemonRepository.getPokemon { pokemon ->
+        pokemonRepository.getPokemonList { pokemon ->
             value = pokemon
         }
     }
