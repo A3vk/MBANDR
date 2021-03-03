@@ -16,7 +16,6 @@ class ServiceVolley() : IServiceVolley {
                 completionHandler(null)
             }
         )
-
         BackendVolley.instance?.addToRequestQueue(jsonObjectRequest)
     }
 }
