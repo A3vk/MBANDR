@@ -15,12 +15,13 @@ class PokedexAdapter (private val pokemon: ArrayList<Pokemon>) : RecyclerView.Ad
                 LayoutInflater.from(parent.context),
                 R.layout.recyclerview_pokemon,
                 parent,
-                false
+                false,
             )
         )
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         holder.recyclerviewPokemonBinding.pokemon = this.pokemon[position]
+        holder.recyclerviewPokemonBinding.pokemonImage
     }
 
     override fun getItemCount() = pokemon.size

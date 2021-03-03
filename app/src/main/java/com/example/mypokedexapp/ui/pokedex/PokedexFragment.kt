@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.toolbox.ImageLoader
+import com.android.volley.toolbox.NetworkImageView
 import com.example.mypokedexapp.R
+import com.example.mypokedexapp.volley.BackendVolley
 
 class PokedexFragment : Fragment() {
 
     private lateinit var pokedexViewModel: PokedexViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
