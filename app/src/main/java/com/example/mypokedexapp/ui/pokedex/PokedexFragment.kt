@@ -14,6 +14,8 @@ import com.example.mypokedexapp.R
 class PokedexFragment : Fragment() {
 
     private lateinit var pokedexViewModel: PokedexViewModel
+    private lateinit  var layoutManager: LinearLayoutManager
+    private lateinit var adapter: PokedexAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,11 +26,30 @@ class PokedexFragment : Fragment() {
             ViewModelProvider(this).get(PokedexViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_pokedex, container, false)
         val recyclerview: RecyclerView = root.findViewById(R.id.recycler_view_pokemon)
+
         pokedexViewModel.pokemon.observe(viewLifecycleOwner, Observer { pokemon ->
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = PokedexAdapter(pokemon)
             recyclerview.also{
-                it.layoutManager = LinearLayoutManager(requireContext())
+                it.layoutManager = layoutManager
                 it.setHasFixedSize(true)
-                it.adapter = PokedexAdapter(pokemon)
+                it.adapter = adapter
+            }
+        })
+
+        recyclerview.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if(dy > 0){
+                    val visibleItemCount = layoutManager.childCount
+                    val pastVisibleItems = layoutManager.findFirstCompletelyVisibleItemPosition()
+                    val total = adapter.itemCount
+
+                    if((visibleItemCount + pastVisibleItems) >= (total - 15)){
+                        pokedexViewModel.getNextPokemon()
+                    }
+                }
             }
         })
         return root
