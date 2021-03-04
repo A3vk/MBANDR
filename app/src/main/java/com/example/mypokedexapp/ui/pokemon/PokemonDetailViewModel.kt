@@ -14,6 +14,7 @@ class PokemonDetailViewModel : ViewModel() {
         get() = _pokemon
 
     fun setPokemon(id: Int) {
+        println(id)
         _pokemon.apply {
             pokemonRepository.getPokemon(id) { pokemon ->
                 value = pokemon

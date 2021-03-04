@@ -2,7 +2,7 @@ package com.example.mypokedexapp.models
 
 import org.json.JSONObject
 
-data class Pokemon(var id: Int, var name: String, var imageUrl: String, var stats : PokemonStats) : Comparable<Pokemon> {
+data class Pokemon(var id: Int, var name: String, var imageUrl: String, var stats : ArrayList<Stat>, var types: ArrayList<Type>) : Comparable<Pokemon> {
     companion object {
         fun fromJson(json: JSONObject): Pokemon {
             val jsonStats = json.getJSONArray("stats")

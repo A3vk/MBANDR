@@ -13,7 +13,7 @@ class PokedexViewModel : ViewModel() {
     private var test = 0
     private val _pokemon = MutableLiveData<ArrayList<Pokemon>>().apply{
         value = ArrayList()
-        pokemonRepository.getPokemon(totalPokemon) { pokemon ->
+        pokemonRepository.getPokemonList(totalPokemon) { pokemon ->
             value?.add(pokemon)
             value?.sort()
             value = value
@@ -28,7 +28,7 @@ class PokedexViewModel : ViewModel() {
         if (totalPokemon == _pokemon.value?.count()) {
             test += 1
             _pokemon.apply {
-                pokemonRepository.getPokemon(totalPokemon) { pokemon ->
+                pokemonRepository.getPokemonList(totalPokemon) { pokemon ->
                     value?.add(pokemon)
                     value?.sort()
                 }

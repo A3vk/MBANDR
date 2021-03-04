@@ -7,9 +7,9 @@ import com.example.mypokedexapp.volley.ServiceVolley
 class PokemonRepository {
     private val service = ServiceVolley()
 
-    fun getPokemon(offset: Int, completionHandler: (onComplete: Pokemon) -> Unit){
+    fun getPokemonList(offset: Int, completionHandler: (onComplete: Pokemon) -> Unit){
         val pokemon = ArrayList<Pokemon>()
-        service.get("${RouterVolley.Pokemon.BASE}?offset=$offset&limit=20") { response ->
+        service.get("${Endpoints.Pokemon.BASE}?offset=$offset&limit=20") { response ->
             if (response != null) {
                 val result = response.getJSONArray("results")
                 for (index in 0 until result.length()) {

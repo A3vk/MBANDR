@@ -35,6 +35,7 @@ class PokedexAdapter (private val pokemon: ArrayList<Pokemon>, private val liste
 
         override fun onClick(v: View?) {
             val position = adapterPosition
+            println(position)
             if(position != RecyclerView.NO_POSITION) {
                 listener.onItemClick(position)
             }
