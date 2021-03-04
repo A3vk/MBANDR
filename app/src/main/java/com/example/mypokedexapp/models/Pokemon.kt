@@ -2,7 +2,7 @@ package com.example.mypokedexapp.models
 
 import org.json.JSONObject
 
-data class Pokemon(var id: Number, var name: String, var imageUrl: String, var stats: ArrayList<Stat>, var types: ArrayList<Type>) {
+data class Pokemon(var id: Int, var name: String, var imageUrl: String, var stats : PokemonStats) : Comparable<Pokemon> {
     companion object {
         fun fromJson(json: JSONObject): Pokemon {
             val jsonStats = json.getJSONArray("stats")
@@ -25,5 +25,9 @@ data class Pokemon(var id: Number, var name: String, var imageUrl: String, var s
                 types
             )
         }
+    }
+
+    override fun compareTo(other: Pokemon): Int {
+        return id - other.id
     }
 }

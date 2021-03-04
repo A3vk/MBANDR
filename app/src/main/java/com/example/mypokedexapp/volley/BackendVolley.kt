@@ -32,7 +32,7 @@ class BackendVolley : Application() {
     // TODO: Check if needed and how used
     val imageLoader: ImageLoader by lazy {
         ImageLoader(requestQueue, object: ImageLoader.ImageCache {
-            private val cache = LruCache<String, Bitmap>(20)
+            private val cache = LruCache<String, Bitmap>(1024)
             override fun getBitmap(url: String): Bitmap? {
                 return cache.get(url)
             }
@@ -42,5 +42,4 @@ class BackendVolley : Application() {
             }
         })
     }
-
 }
