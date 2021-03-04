@@ -11,7 +11,7 @@ import com.example.mypokedexapp.R
 import com.example.mypokedexapp.models.Pokemon
 import com.example.mypokedexapp.volley.BackendVolley
 
-class PokedexAdapter (private val pokemon: ArrayList<Pokemon>) : RecyclerView.Adapter<PokedexAdapter.PokemonViewHolder>() {
+class PokedexAdapter (private val pokemon: ArrayList<Pokemon>, private val listener: OnItemClickListener) : RecyclerView.Adapter<PokedexAdapter.PokemonViewHolder>() {
     private var imageLoader: ImageLoader? = BackendVolley.instance?.imageLoader
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_pokemon, parent, false)
@@ -25,8 +25,24 @@ class PokedexAdapter (private val pokemon: ArrayList<Pokemon>) : RecyclerView.Ad
 
     override fun getItemCount() = pokemon.size
 
-    inner class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val pokemonName: TextView = itemView.findViewById(R.id.pokemonName)
         val pokemonImage: NetworkImageView = itemView.findViewById(R.id.pokemonImage)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            println(position)
+            if(position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 }
