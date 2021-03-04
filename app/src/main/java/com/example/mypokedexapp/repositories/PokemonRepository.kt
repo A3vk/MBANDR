@@ -24,21 +24,11 @@ class PokemonRepository {
         }
     }
 
-    fun getPokemon(id: Number, completionHandler: (onComplete: ArrayList<Pokemon>) -> Unit){
-        val pokemon = ArrayList<Pokemon>()
+    fun getPokemon(id: Number, completionHandler: (onComplete: Pokemon) -> Unit){
         service.get("${Endpoints.Pokemon.BASE}${id}") { response ->
-            println(response)
-//            if (response != null) {
-//                val result = response.getJSONArray("results")
-//                for (index in 0 until result.length()) {
-//                    service.get(result.getJSONObject(index).getString("url")) { pokemonJson ->
-//                        if (pokemonJson != null) {
-//                            pokemon.add(Pokemon.fromJson(pokemonJson))
-//                            completionHandler(pokemon)
-//                        }
-//                    }
-//                }
-//            }
+            if (response != null) {
+                completionHandler(Pokemon.fromJson(response))
+            }
         }
     }
 }

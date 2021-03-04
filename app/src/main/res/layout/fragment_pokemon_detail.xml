@@ -44,42 +44,43 @@
         android:id="@+id/pokemonTypes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pokemonImage">
 
         <TextView
-            android:id="@+id/pokemonType1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#ff0000"
+            android:minWidth="100dp"
             android:gravity="center_horizontal"
             android:padding="5dp"
+            android:layout_marginRight="25dp"
             android:text="@string/placeholder"
             android:textAlignment="center"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="199dp" />
-
-        <Space
-            android:layout_width="50dp"
-            android:layout_height="match_parent" />
+            tools:layout_editor_absoluteY="199dp"
+            android:layout_marginEnd="25dp" />
 
         <TextView
-            android:id="@+id/pokemonType2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#ff0000"
+            android:minWidth="100dp"
             android:gravity="center_horizontal"
             android:padding="5dp"
+            android:layout_marginLeft="25dp"
             android:text="@string/placeholder"
             android:textAlignment="center"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="199dp" />
+            tools:layout_editor_absoluteY="199dp"
+            android:layout_marginStart="25dp" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/pokemonStats"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

@@ -35,7 +35,7 @@
     <fragment
         android:id="@+id/pokemonDetailFragment"
         android:name="com.example.mypokedexapp.ui.pokemon.PokemonDetailFragment"
-        android:label="fragment_pokemon_detail"
+        android:label="@string/title_pokemon_details"
         tools:layout="@layout/fragment_pokemon_detail" />
 
 </navigation>

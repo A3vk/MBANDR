@@ -25,7 +25,7 @@ class PokedexFragment : Fragment(), PokedexAdapter.OnItemClickListener {
         pokedexViewModel = ViewModelProvider(this).get(PokedexViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_pokedex, container, false)
         val recyclerview: RecyclerView = root.findViewById(R.id.recycler_view_pokemon)
-        pokedexViewModel.pokemon.observe(viewLifecycleOwner, Observer { pokemon ->
+        pokedexViewModel.pokemon.observe(viewLifecycleOwner, { pokemon ->
             recyclerview.also{
                 it.layoutManager = LinearLayoutManager(requireContext())
                 it.setHasFixedSize(true)
@@ -37,6 +37,6 @@ class PokedexFragment : Fragment(), PokedexAdapter.OnItemClickListener {
 
     override fun onItemClick(position: Int) {
         val clickedPokemon = pokedexViewModel.pokemon.value?.get(position)
-        findNavController().navigate(R.id.action_navigation_pokedex_to_pokemonDetailFragment, bundleOf("pokemon" to clickedPokemon))
+        findNavController().navigate(R.id.action_navigation_pokedex_to_pokemonDetailFragment, bundleOf("pokemonId" to clickedPokemon?.id))
     }
 }
