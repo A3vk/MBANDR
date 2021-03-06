@@ -15,14 +15,14 @@ interface PokemonDao {
     suspend fun deletePokemon(pokemon: Pokemon)
 
     @Query("SELECT * FROM pokemon")
-    fun getAllPokemon(): Array<Pokemon>
+    suspend fun getAllPokemon(): Array<Pokemon>
 
     @Query("SELECT * FROM pokemon WHERE number < 0")
-    fun getAllCustomPokemon(): Array<Pokemon>
+    suspend fun getAllCustomPokemon(): Array<Pokemon>
 
     @Query("SELECT * FROM pokemon WHERE is_in_team = 1")
-    fun getPokemonTeam(): Array<Pokemon>
+    suspend fun getPokemonTeam(): Array<Pokemon>
 
     @Query("SELECT * FROM pokemon WHERE number = :number LIMIT 1")
-    fun getPokemon(number: Int): Pokemon?
+    suspend fun getPokemon(number: Int): Pokemon?
 }

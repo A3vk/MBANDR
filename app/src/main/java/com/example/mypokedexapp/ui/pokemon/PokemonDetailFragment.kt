@@ -12,16 +12,21 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.children
 import androidx.core.view.get
+import androidx.fragment.app.viewModels
 import com.android.volley.toolbox.NetworkImageView
+import com.example.mypokedexapp.PokemonApplication
 import com.example.mypokedexapp.R
+import com.example.mypokedexapp.ui.pokedex.PokedexViewModel
+import com.example.mypokedexapp.ui.pokedex.PokedexViewModelFactory
 import com.example.mypokedexapp.volley.BackendVolley
 import org.w3c.dom.Text
 import java.util.*
 import kotlin.math.roundToInt
 
 class PokemonDetailFragment : Fragment() {
-
-    private lateinit var viewModel: PokemonDetailViewModel
+    private val pokemonDetailViewModel: PokemonDetailViewModel by viewModels {
+        PokemonDetailViewModelFactory((activity?.application as PokemonApplication).repository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,10 +42,9 @@ class PokemonDetailFragment : Fragment() {
         val secondaryTypeView: TextView = root.findViewById(R.id.secondaryType)
         val statContainer: LinearLayout = root.findViewById(R.id.pokemonStats)
 
-        viewModel = ViewModelProvider(this@PokemonDetailFragment).get(PokemonDetailViewModel::class.java)
-        viewModel.setPokemon(arguments?.get("pokemonId") as Int)
-        viewModel.pokemon.observe(viewLifecycleOwner, { pokemon ->
-            imageView.setImageUrl(pokemon.imageUrl, BackendVolley.instance?.imageLoader)
+        pokemonDetailViewModel.setPokemon(arguments?.get("pokemonNumber") as Int)
+        pokemonDetailViewModel.pokemon.observe(viewLifecycleOwner, { pokemon ->
+            imageView.setImageUrl(pokemon.imageUrl, (activity?.application as PokemonApplication).imageLoader)
             pokemonNameView.text = pokemon.name.capitalize(Locale.ROOT)
             val pokedexNumberString = "# ${pokemon.number}"
             pokedexNumberView.text = pokedexNumberString

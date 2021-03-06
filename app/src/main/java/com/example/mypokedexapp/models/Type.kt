@@ -40,5 +40,12 @@ data class Type(
         fun getAllTypes(): List<String> {
             return typeToColor.keys.toList()
         }
+
+        fun getType(name: String): Type? {
+            if (typeToColor.containsKey(name)) {
+                return Type(name, typeToColor[name]!!)
+            }
+            return null
+        }
     }
 }

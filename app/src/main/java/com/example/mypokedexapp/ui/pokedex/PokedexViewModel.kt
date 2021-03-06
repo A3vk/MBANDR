@@ -10,22 +10,19 @@ import kotlinx.coroutines.launch
 class PokedexViewModel(private val repository: PokemonRepository): ViewModel() {
     private val offset = 20
     private var totalPokemon = 0
+
+    val pokemon: LiveData<ArrayList<Pokemon>>
+        get() = _pokemon
+
     private val _pokemon = MutableLiveData<ArrayList<Pokemon>>().apply{
         value = ArrayList()
         repository.getPokemonList(totalPokemon) { pokemon ->
             value?.add(pokemon)
             value?.sort()
             value = value
-
-            viewModelScope.launch {
-                repository.savePokemon(pokemon)
-            }
         }
         totalPokemon += offset
     }
-
-    val pokemon: LiveData<ArrayList<Pokemon>>
-        get() = _pokemon
 
     fun getNextPokemon() {
         if (totalPokemon == _pokemon.value?.count()) {
@@ -33,6 +30,7 @@ class PokedexViewModel(private val repository: PokemonRepository): ViewModel() {
                 repository.getPokemonList(totalPokemon) { pokemon ->
                     value?.add(pokemon)
                     value?.sort()
+                    value = value
                 }
             }
             totalPokemon += offset

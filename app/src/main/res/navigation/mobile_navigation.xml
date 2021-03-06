@@ -11,8 +11,8 @@
         android:label="@string/title_pokedex"
         tools:layout="@layout/fragment_pokedex" >
         <action
-            android:id="@+id/action_navigation_pokedex_to_pokemonDetailFragment"
-            app:destination="@id/pokemonDetailFragment" />
+            android:id="@+id/action_navigation_pokedex_to_navigation_pokemon_detail"
+            app:destination="@id/navigation_pokemon_detail" />
     </fragment>
 
     <fragment
@@ -34,7 +34,7 @@
         tools:layout="@layout/fragment_settings" />
 
     <fragment
-        android:id="@+id/pokemonDetailFragment"
+        android:id="@+id/navigation_pokemon_detail"
         android:name="com.example.mypokedexapp.ui.pokemon.PokemonDetailFragment"
         android:label="@string/title_pokemon_details"
         tools:layout="@layout/fragment_pokemon_detail" />
