@@ -6,4 +6,8 @@
     <string name="title_settings">Settings</string>
     <string name="title_pokemon_details">Pokemon Details</string>
     <string name="placeholder">{{PLACEHOLDER}}</string>
+
+    <!-- SharedPreferences Keys -->
+    <string name="color_preference">Color</string>
+
 </resources>

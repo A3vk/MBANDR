@@ -5,14 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <CheckBoxPreference
-        android:key="wifi enabled"
-        android:title="WiFi" />
+    <ListPreference
+        android:key="color_preference"
+        android:title="Color Thema"
+        android:entries="@array/color_preference_names"
+        android:entryValues="@array/color_preference_values"
+        android:summary="kies een kleur voor het thema van de app"/>
+        />
 
-<!--    <ListPreference-->
-<!--        android:key="color_preference"-->
-<!--        android:title="Color Theme"-->
-<!--        android:entries="@array/"-->
-<!--        android:entryValues="@array/colorAlias"/>-->
-<!--        />-->
 </PreferenceScreen>

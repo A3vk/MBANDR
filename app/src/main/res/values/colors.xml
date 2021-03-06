@@ -7,4 +7,24 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--color arrays used for the color preference-->
+    <string-array name="color_preference_names">
+        <item>Rood</item>
+        <!--item>#FF5733</item-->
+        <item>Groen</item>
+        <!--item>#39FF33</item-->
+        <item>Blauw</item>
+        <!--item>#334FFF</item-->
+    </string-array>
+
+    <string-array name="color_preference_values">
+        <!--item>Red</item-->
+        <item>#FF5733</item>
+        <!--item>Green</item-->
+        <item>#39FF33</item>
+        <!--item>Blue</item-->
+        <item>#334FFF</item>
+    </string-array>
+
 </resources>
