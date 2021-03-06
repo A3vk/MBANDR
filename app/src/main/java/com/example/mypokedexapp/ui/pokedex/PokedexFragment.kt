@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -46,12 +47,6 @@ class PokedexFragment : Fragment() {
             }
         }
 
-
         return root
     }
-
-//    override fun onItemClick(position: Int) {
-//        val clickedPokemon = pokedexViewModel.pokemon.value?.get(position)
-//        findNavController().navigate(R.id.action_navigation_pokedex_to_pokemonDetailFragment, bundleOf("pokemonId" to clickedPokemon?.number))
-//    }
 }

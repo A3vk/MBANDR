@@ -10,9 +10,11 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.children
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.android.volley.toolbox.NetworkImageView
 import com.example.mypokedexapp.PokemonApplication
 import com.example.mypokedexapp.R
@@ -26,6 +28,18 @@ import kotlin.math.roundToInt
 class PokemonDetailFragment : Fragment() {
     private val pokemonDetailViewModel: PokemonDetailViewModel by viewModels {
         PokemonDetailViewModelFactory((activity?.application as PokemonApplication).repository)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().popBackStack()
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
     override fun onCreateView(

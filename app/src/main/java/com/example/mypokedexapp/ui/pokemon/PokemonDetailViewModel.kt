@@ -13,7 +13,6 @@ class PokemonDetailViewModel(private val pokemonRepository: PokemonRepository) :
     private val _pokemon = MutableLiveData<Pokemon>()
 
     fun setPokemon(id: Int) {
-        println(id)
         _pokemon.apply {
             pokemonRepository.getPokemon(id) { pokemon ->
                 value = pokemon
