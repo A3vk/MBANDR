@@ -1,10 +1,12 @@
 package com.example.mypokedexapp.repositories
 
+import android.content.Context
 import com.example.mypokedexapp.models.Pokemon
+import com.example.mypokedexapp.room.PokemonDatabase
 import com.example.mypokedexapp.values.Endpoints
 import com.example.mypokedexapp.volley.ServiceVolley
 
-class PokemonRepository {
+class PokemonRepository(val context: Context) {
     private val service = ServiceVolley()
 
     fun getPokemonList(offset: Int, completionHandler: (onComplete: Pokemon) -> Unit){
@@ -29,5 +31,13 @@ class PokemonRepository {
                 completionHandler(Pokemon.fromJson(response))
             }
         }
+    }
+
+    fun savePokemon(pokemon: Pokemon) {
+        PokemonDatabase.getInstance(context).pokemonDao().insertPokemon(pokemon)
+    }
+
+    fun getSavedPokemon(number: Int): Pokemon? {
+        return PokemonDatabase.getInstance(context).pokemonDao().getPokemon(number)
     }
 }

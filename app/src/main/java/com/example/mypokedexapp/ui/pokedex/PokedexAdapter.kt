@@ -19,7 +19,7 @@ class PokedexAdapter (private val pokemon: ArrayList<Pokemon>, private val liste
     }
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-        holder.pokemonName.text = "# ${pokemon[position].id} ${pokemon[position].name}"
+        holder.pokemonName.text = "# ${pokemon[position].number} ${pokemon[position].name}"
         holder.pokemonImage.setImageUrl(pokemon[position].imageUrl, BackendVolley.instance?.imageLoader)
     }
 

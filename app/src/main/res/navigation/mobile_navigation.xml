@@ -32,6 +32,7 @@
         android:name="com.example.mypokedexapp.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
+
     <fragment
         android:id="@+id/pokemonDetailFragment"
         android:name="com.example.mypokedexapp.ui.pokemon.PokemonDetailFragment"
