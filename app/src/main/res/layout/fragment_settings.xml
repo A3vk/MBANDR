@@ -7,7 +7,7 @@
 
     <ListPreference
         android:key="color_preference"
-        android:title="Color Thema"
+        android:title="Kleur Thema"
         android:entries="@array/color_preference_names"
         android:entryValues="@array/color_preference_values"
         android:summary="kies een kleur voor het thema van de app"/>
