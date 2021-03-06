@@ -1,12 +1,14 @@
 package com.example.mypokedexapp.repositories
 
 import android.content.Context
+import androidx.annotation.WorkerThread
 import com.example.mypokedexapp.models.Pokemon
 import com.example.mypokedexapp.room.PokemonDatabase
+import com.example.mypokedexapp.room.dao.PokemonDao
 import com.example.mypokedexapp.values.Endpoints
 import com.example.mypokedexapp.volley.ServiceVolley
 
-class PokemonRepository(val context: Context) {
+class PokemonRepository(private val pokemonDao: PokemonDao) {
     private val service = ServiceVolley()
 
     fun getPokemonList(offset: Int, completionHandler: (onComplete: Pokemon) -> Unit){
@@ -33,11 +35,12 @@ class PokemonRepository(val context: Context) {
         }
     }
 
-    fun savePokemon(pokemon: Pokemon) {
-        PokemonDatabase.getInstance(context).pokemonDao().insertPokemon(pokemon)
+    @WorkerThread
+    suspend fun savePokemon(pokemon: Pokemon) {
+        pokemonDao.insertPokemon(pokemon)
     }
 
     fun getSavedPokemon(number: Int): Pokemon? {
-        return PokemonDatabase.getInstance(context).pokemonDao().getPokemon(number)
+        return pokemonDao.getPokemon(number)
     }
 }

@@ -6,13 +6,13 @@ import com.example.mypokedexapp.models.Pokemon
 @Dao
 interface PokemonDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertPokemon(pokemon: Pokemon)
+    suspend fun insertPokemon(pokemon: Pokemon)
 
     @Update
-    fun updatePokemon(pokemon: Pokemon)
+    suspend fun updatePokemon(pokemon: Pokemon)
 
     @Delete
-    fun deletePokemon(pokemon: Pokemon)
+    suspend fun deletePokemon(pokemon: Pokemon)
 
     @Query("SELECT * FROM pokemon")
     fun getAllPokemon(): Array<Pokemon>

@@ -4,45 +4,48 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.NetworkImageView
 import com.example.mypokedexapp.R
 import com.example.mypokedexapp.models.Pokemon
 import com.example.mypokedexapp.volley.BackendVolley
 
-class PokedexAdapter (private val pokemon: ArrayList<Pokemon>, private val listener: OnItemClickListener) : RecyclerView.Adapter<PokedexAdapter.PokemonViewHolder>() {
-    private var imageLoader: ImageLoader? = BackendVolley.instance?.imageLoader
+class PokedexAdapter : ListAdapter<Pokemon, PokemonViewHolder>(PokemonCompacter()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_pokemon, parent, false)
-        return PokemonViewHolder(view)
+        return PokemonViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-        holder.pokemonName.text = "# ${pokemon[position].number} ${pokemon[position].name}"
-        holder.pokemonImage.setImageUrl(pokemon[position].imageUrl, BackendVolley.instance?.imageLoader)
+        val current = getItem(position)
+        holder.bind(current)
     }
 
-    override fun getItemCount() = pokemon.size
+    class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val pokemonName: TextView = itemView.findViewById(R.id.pokemonName)
+        private val pokemonImage: NetworkImageView = itemView.findViewById(R.id.pokemonImage)
 
-    inner class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        val pokemonName: TextView = itemView.findViewById(R.id.pokemonName)
-        val pokemonImage: NetworkImageView = itemView.findViewById(R.id.pokemonImage)
-
-        init {
-            itemView.setOnClickListener(this)
+        fun bind(pokemon: Pokemon) {
+            pokemonName.text = pokemon.name
+            pokemonImage.setImageUrl(pokemon.imageUrl, BackendVolley.instance?.imageLoader)
         }
 
-        override fun onClick(v: View?) {
-            val position = adapterPosition
-            println(position)
-            if(position != RecyclerView.NO_POSITION) {
-                listener.onItemClick(position)
+        companion object {
+            fun create(parent: ViewGroup): PokemonViewHolder {
+                val view: View = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_pokemon, parent, false)
+                return PokemonViewHolder(view)
             }
         }
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(position: Int)
+    class PokemonCompacter : DiffUtil.ItemCallback<Pokemon>() {
+        override fun areItemsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
+            return oldItem.number == newItem.number
+        }
     }
 }

@@ -17,15 +17,15 @@ abstract class PokemonDatabase: RoomDatabase() {
         private var INSTANCE: PokemonDatabase? = null
 
         fun getInstance(context: Context): PokemonDatabase {
-            synchronized(this) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(
-                        context.applicationContext,
-                        PokemonDatabase::class.java,
-                        "pokemon_database"
-                    ).build()
-                }
-                return INSTANCE!!
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    PokemonDatabase::class.java,
+                    "pokemon_database"
+                ).build()
+                INSTANCE = instance
+
+                instance
             }
         }
     }
