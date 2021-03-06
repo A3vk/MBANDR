@@ -1,6 +1,10 @@
 package com.example.mypokedexapp.ui.pokemon
 
+import android.content.SharedPreferences
+import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.drawable.ColorDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,6 +16,8 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.children
 import androidx.core.view.get
+import androidx.preference.Preference
+import androidx.preference.PreferenceManager
 import com.android.volley.toolbox.NetworkImageView
 import com.example.mypokedexapp.R
 import com.example.mypokedexapp.models.Pokemon
@@ -22,7 +28,7 @@ import kotlin.collections.ArrayList
 import kotlin.math.round
 import kotlin.math.roundToInt
 
-class PokemonDetailFragment : Fragment() {
+class PokemonDetailFragment : Fragment(){
 
     private lateinit var viewModel: PokemonDetailViewModel
 
@@ -31,6 +37,9 @@ class PokemonDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_pokemon_detail, container, false)
+
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
+        val color = sharedPref.getString("color_preference", "#000000")
 
         // Get all View elements
         val imageView: NetworkImageView = root.findViewById(R.id.pokemonImage)
@@ -65,6 +74,7 @@ class PokemonDetailFragment : Fragment() {
                 title.text = stat.name
                 value.text = stat.value.toString()
                 valueBar.progress = (stat.value / 255.0 * 100).roundToInt()
+                valueBar.progressDrawable.setColorFilter(Color.parseColor(color), android.graphics.PorterDuff.Mode.SRC_IN)
             }
         })
 
