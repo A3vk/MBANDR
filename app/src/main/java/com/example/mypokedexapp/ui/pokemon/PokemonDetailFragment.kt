@@ -1,6 +1,7 @@
 package com.example.mypokedexapp.ui.pokemon
 
 import android.content.SharedPreferences
+import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -103,8 +104,7 @@ class PokemonDetailFragment : Fragment() {
                     title.text = resources.getString(resources.getIdentifier(stat.name, "string", context?.packageName)).capitalize(Locale.ROOT)
                     value.text = stat.value.toString()
                     valueBar.progress = (stat.value / 255.0 * 100).roundToInt()
-                    val colorFilter =  BlendModeColorFilterCompat.createBlendModeColorFilterCompat(Color.parseColor(color), BlendModeCompat.SRC_ATOP)
-                    valueBar.progressDrawable.colorFilter = colorFilter
+                    valueBar.progressTintList = ColorStateList.valueOf(Color.parseColor(color))
                 }
             }
         })

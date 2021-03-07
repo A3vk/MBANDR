@@ -39,21 +39,38 @@
     <string name="fairy">fairy</string>
 
     <!--Language Preference -->
+    <string name="language_preference">Language</string>
+    <string name="language_preference_summary">Choose the color language of the application</string>
     <string-array name="language_preference_names">
         <item>English</item>
-        <!--item>EN</item-->
         <item>Dutch</item>
-        <!--item>NL</item-->
     </string-array>
 
     <string-array name="language_preference_values">
-        <!--item>English</item-->
         <item>en</item>
-        <!--item>Dutch</item-->
         <item>nl</item>
     </string-array>
 
-    <string-array name="numbers">
+    <!-- Color Preference -->
+    <string name="color_preference">Color</string>
+    <string name="color_preference_summary">Choose the primary color for the app</string>
+    <string-array name="color_preference_names">
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+    </string-array>
+
+    <string-array name="color_preference_values">
+        <item>#FF5733</item>
+        <item>#39FF33</item>
+        <item>#334FFF</item>
+    </string-array>
+
+    <!-- Share text -->
+    <string name="share_intro">Look at my pokemon team from the \"%1$s\". It has %2$s pokemon:\n</string>
+    <string name="share_ending">\nDownload the app now if you want to create your own team!</string>
+    <string name="share_empty">There are no pokemon in my team :(</string>
+    <string-array name="share_numbers">
         <item>one</item>
         <item>two</item>
         <item>three</item>

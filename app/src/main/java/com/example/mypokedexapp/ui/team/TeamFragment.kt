@@ -62,15 +62,14 @@ class TeamFragment : Fragment() {
             pokemon.let { adapter.submitList(ArrayList(it)) }
 
             if(!pokemon.isEmpty()) {
-                pokemonShareText = "Look at my pokemon team from the \"${getString(R.string.app_name)}\". It has ${resources.getStringArray(R.array.numbers)[pokemon.count() - 1]} pokemon:\n"
+                pokemonShareText = getString(R.string.share_intro, getString(R.string.app_name), resources.getStringArray(R.array.share_numbers)[pokemon.count() - 1])
                 pokemon.forEach {item ->
                     pokemonShareText += "\t${pokemon.indexOf(item) + 1}) # ${item.number}\t-\t${item.name}\n"
                 }
-                pokemonShareText += "\nDownload the app now if you want to create your own team!"
+                pokemonShareText += getString(R.string.share_ending)
             } else {
-                pokemonShareText = "There are no pokemon in my team :("
+                pokemonShareText = getString(R.string.share_ending)
             }
-
         }
 
         return root
