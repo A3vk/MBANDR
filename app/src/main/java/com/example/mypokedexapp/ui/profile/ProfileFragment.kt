@@ -51,11 +51,10 @@ class ProfileFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.profile_menu_next -> {
-                findNavController().navigate(R.id.action_navigation_profile_to_fragment_pokemon_create)
+                findNavController().navigate(R.id.action_navigation_profile_to_navigation_pokemon_create)
                 true
             }
-            else -> false
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
 }
