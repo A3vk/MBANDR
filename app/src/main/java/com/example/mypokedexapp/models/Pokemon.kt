@@ -51,8 +51,8 @@ data class Pokemon(
             0 -> Stat("hp", hp)
             1 -> Stat("attack", attack)
             2 -> Stat("defence", defence)
-            3 -> Stat("special attack", specialAttack)
-            4 -> Stat("special defence", specialDefence)
+            3 -> Stat("special_attack", specialAttack)
+            4 -> Stat("special_defence", specialDefence)
             5 -> Stat("speed", speed)
             else -> null
         }

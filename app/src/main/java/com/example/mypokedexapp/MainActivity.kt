@@ -1,33 +1,45 @@
 package com.example.mypokedexapp
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.res.ColorStateList
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.children
-import androidx.core.view.get
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlin.math.roundToInt
+import java.util.*
 
-class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
+
+class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener{
+    private var currentLanguage = "en"
+    private var currentLang: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        currentLanguage = intent.getStringExtra(currentLang).toString()
 
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         sharedPref.registerOnSharedPreferenceChangeListener(this)
         setTopBarColor(sharedPref)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = Color.parseColor(
+            sharedPref.getString(
+                "color_preference",
+                "#FF6200EE"
+            )
+        )
+
+        setApplicationLocale("nl")
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         setBottomMenuColor(sharedPref)
@@ -38,15 +50,14 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
    }
 
     private fun setTopBarColor(sharedPref: SharedPreferences){
-        val color = sharedPref.getString("color_preference", "#000000")
+        val color = sharedPref.getString("color_preference", "FF6200EE")
         val colorDrawable = ColorDrawable(Color.parseColor(color))
         supportActionBar?.setBackgroundDrawable(colorDrawable)
     }
 
-
     private fun setBottomMenuColor(sharedPref: SharedPreferences){
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        val color = sharedPref.getString("color_preference", "#000000")
+        val color = sharedPref.getString("color_preference", "FF6200EE")
 
         val states = arrayOf(
             intArrayOf(android.R.attr.state_selected),
@@ -67,7 +78,25 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key == "color_preference") {
             setTopBarColor(sharedPreferences!!)
-            setBottomMenuColor(sharedPreferences!!)
+            setBottomMenuColor(sharedPreferences)
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = Color.parseColor(sharedPreferences.getString(key, "#FF6200EE"))
+        }
+        if (key == "language_preference"){
+            setApplicationLocale(sharedPreferences?.getString(key, "nl").toString())
+        }
+    }
+
+    private fun setApplicationLocale(locale: String) {
+        println (currentLanguage)
+        println(locale)
+        if(locale != currentLanguage) {
+            val resources: Resources = resources
+            val config: Configuration = resources.configuration
+            config.setLocale(Locale(locale?.toLowerCase()))
+            resources.configuration.updateFrom(config)
+            val refresh = Intent(this, MainActivity::class.java)
+            startActivity(refresh)
         }
     }
 }
