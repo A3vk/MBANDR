@@ -69,7 +69,6 @@ class PokemonDetailFragment : Fragment() {
                 val valueBar = linearLayout[2] as ProgressBar
                 val stat = pokemon.getStatByIndex(index)
                 if(stat != null) {
-                    println(stat.name)
                     title.text = resources.getString(resources.getIdentifier(stat.name, "string", context?.packageName))
                     value.text = stat.value.toString()
                     valueBar.progress = (stat.value / 255.0 * 100).roundToInt()

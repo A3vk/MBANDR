@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Mijn Pokedex App</string>
+    <string name="title_pokedex">Pokedex</string>
+    <string name="title_team">Team</string>
+    <string name="title_profile">Profiel</string>
+    <string name="title_settings">Instellingen</string>
+    <string name="title_pokemon_details">Pokemon Details</string>
+    <string name="placeholder">{{PLACEHOLDER}}</string>
 
     <!--Pokemon Stat Names -->
     <string name="hp">hp</string>
@@ -29,4 +36,18 @@
     <string name="dark">duister</string>
     <string name="fairy">fee</string>
 
+    <!--Language Preference -->
+    <string-array name="language_preference_names">
+        <item>Engels</item>
+        <!--item>EN</item-->
+        <item>Nederlands</item>
+        <!--item>NL</item-->
+    </string-array>
+
+    <string-array name="language_preference_values">
+        <!--item>English</item-->
+        <item>en</item>
+        <!--item>Dutch</item-->
+        <item>nl</item>
+    </string-array>
 </resources>

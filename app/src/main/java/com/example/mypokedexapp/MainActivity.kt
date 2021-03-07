@@ -1,5 +1,6 @@
 package com.example.mypokedexapp
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
@@ -16,48 +17,43 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
+import com.example.mypokedexapp.utils.ColorHelper
+import com.example.mypokedexapp.values.PreferenceKeys
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 
 
 class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener{
-    private var currentLanguage = "en"
-    private var currentLang: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        currentLanguage = intent.getStringExtra(currentLang).toString()
 
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         sharedPref.registerOnSharedPreferenceChangeListener(this)
-        setTopBarColor(sharedPref)
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = Color.parseColor(
-            sharedPref.getString(
-                "color_preference",
-                "#FF6200EE"
-            )
-        )
-
-        setApplicationLocale("nl")
+        updateColors(sharedPref)
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        setBottomMenuColor(sharedPref)
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(navView.menu)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
    }
 
+    private fun updateColors(sharedPref: SharedPreferences) {
+        setTopBarColor(sharedPref)
+        setBottomMenuColor(sharedPref)
+        setStatusBarColor(sharedPref)
+    }
+
     private fun setTopBarColor(sharedPref: SharedPreferences){
-        val color = sharedPref.getString("color_preference", "FF6200EE")
+        val color = sharedPref.getString(PreferenceKeys.COLOR, PreferenceKeys.DEFAULT_COLOR)
         val colorDrawable = ColorDrawable(Color.parseColor(color))
         supportActionBar?.setBackgroundDrawable(colorDrawable)
     }
 
     private fun setBottomMenuColor(sharedPref: SharedPreferences){
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        val color = sharedPref.getString("color_preference", "FF6200EE")
+        val color = sharedPref.getString(PreferenceKeys.COLOR, PreferenceKeys.DEFAULT_COLOR)
 
         val states = arrayOf(
             intArrayOf(android.R.attr.state_selected),
@@ -75,28 +71,33 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener{
         println(navView.itemTextColor)
     }
 
+    private fun setStatusBarColor(sharedPref: SharedPreferences) {
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = ColorHelper.darken(Color.parseColor(sharedPref.getString(PreferenceKeys.COLOR, PreferenceKeys.DEFAULT_COLOR)), 0.2f)
+    }
+
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key == "color_preference") {
-            setTopBarColor(sharedPreferences!!)
-            setBottomMenuColor(sharedPreferences)
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            window.statusBarColor = Color.parseColor(sharedPreferences.getString(key, "#FF6200EE"))
-        }
-        if (key == "language_preference"){
-            setApplicationLocale(sharedPreferences?.getString(key, "nl").toString())
+        when(key) {
+            PreferenceKeys.COLOR -> {
+                updateColors(sharedPreferences!!)
+            }
+            PreferenceKeys.LANGUAGE -> {
+                updateBaseContextLocale(applicationContext)
+                recreate()
+            }
         }
     }
 
-    private fun setApplicationLocale(locale: String) {
-        println (currentLanguage)
-        println(locale)
-        if(locale != currentLanguage) {
-            val resources: Resources = resources
-            val config: Configuration = resources.configuration
-            config.setLocale(Locale(locale?.toLowerCase()))
-            resources.configuration.updateFrom(config)
-            val refresh = Intent(this, MainActivity::class.java)
-            startActivity(refresh)
-        }
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(updateBaseContextLocale(base!!))
+    }
+
+    private fun updateBaseContextLocale(context: Context): Context {
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        val locale = Locale(sharedPref.getString(PreferenceKeys.LANGUAGE, PreferenceKeys.DEFAULT_LANGUAGE)!!)
+        Locale.setDefault(locale)
+        val configuration = Configuration(context.resources.configuration)
+        configuration.setLocale(locale)
+        return context.createConfigurationContext(configuration)
     }
 }
