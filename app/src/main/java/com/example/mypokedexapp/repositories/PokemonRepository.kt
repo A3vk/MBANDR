@@ -63,4 +63,9 @@ class PokemonRepository(private val pokemonDao: PokemonDao, private val serviceV
             pokemonDao.deletePokemon(pokemon)
         }
     }
+
+    @WorkerThread
+    suspend fun getNewCustomPokemonId() : Int{
+        return pokemonDao.getNewCustomPokemonId()
+    }
 }

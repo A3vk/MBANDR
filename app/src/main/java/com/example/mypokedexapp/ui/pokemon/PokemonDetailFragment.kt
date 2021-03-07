@@ -1,8 +1,6 @@
 package com.example.mypokedexapp.ui.pokemon
 
-import android.content.SharedPreferences
 import android.graphics.Color
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -12,18 +10,13 @@ import android.widget.TextView
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.core.view.children
 import androidx.core.view.get
 import androidx.preference.PreferenceManager
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.android.volley.toolbox.NetworkImageView
 import com.example.mypokedexapp.PokemonApplication
 import com.example.mypokedexapp.R
-import com.example.mypokedexapp.ui.pokedex.PokedexViewModel
-import com.example.mypokedexapp.ui.pokedex.PokedexViewModelFactory
-import com.example.mypokedexapp.volley.BackendVolley
 import java.util.*
 import kotlin.math.roundToInt
 

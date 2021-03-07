@@ -36,6 +36,12 @@
     <string name="dark">duister</string>
     <string name="fairy">fee</string>
 
+    <!--Create Pokemon -->
+    <string name="pokemon_name">Naam</string>
+    <string name="pokemon_primary_type">Primair Type</string>
+    <string name="pokemon_secondary_type">Secundair Type</string>
+    <string name="pokemon_save_button">Pokemon Opslaan</string>
+
     <!--Language Preference -->
     <string-array name="language_preference_names">
         <item>Engels</item>

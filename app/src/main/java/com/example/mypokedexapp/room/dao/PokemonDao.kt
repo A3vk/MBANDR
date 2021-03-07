@@ -29,4 +29,8 @@ interface PokemonDao {
 
     @Query("SELECT * FROM pokemon WHERE number = :number LIMIT 1")
     suspend fun getPokemon(number: Int): Pokemon
+
+    @Query("SELECT MIN(number) - 1 FROM pokemon")
+    suspend fun getNewCustomPokemonId() : Int
+
 }

@@ -39,6 +39,12 @@
     <string name="dark">dark</string>
     <string name="fairy">fairy</string>
 
+    <!--Create Pokemon -->
+    <string name="pokemon_name">Name</string>
+    <string name="pokemon_primary_type">Primary Type</string>
+    <string name="pokemon_secondary_type">Secondary Type</string>
+    <string name="pokemon_save_button">Save Pokemon</string>
+
     <!--Language Preference -->
     <string-array name="language_preference_names">
         <item>English</item>
