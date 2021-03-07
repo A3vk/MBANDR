@@ -61,11 +61,16 @@ class TeamFragment : Fragment() {
         teamViewModel.pokemonTeam.observe(viewLifecycleOwner) { pokemon ->
             pokemon.let { adapter.submitList(ArrayList(it)) }
 
-            pokemonShareText = "Look at my pokemon team from the \"${getString(R.string.app_name)}\". It has ${resources.getStringArray(R.array.numbers)[pokemon.count() - 1]} pokemon:\n"
-            pokemon.forEach {item ->
-                pokemonShareText += "\t${pokemon.indexOf(item) + 1}) # ${item.number}\t-\t${item.name}\n"
+            if(!pokemon.isEmpty()) {
+                pokemonShareText = "Look at my pokemon team from the \"${getString(R.string.app_name)}\". It has ${resources.getStringArray(R.array.numbers)[pokemon.count() - 1]} pokemon:\n"
+                pokemon.forEach {item ->
+                    pokemonShareText += "\t${pokemon.indexOf(item) + 1}) # ${item.number}\t-\t${item.name}\n"
+                }
+                pokemonShareText += "\nDownload the app now if you want to create your own team!"
+            } else {
+                pokemonShareText = "There are no pokemon in my team :("
             }
-            pokemonShareText += "\nDownload the app now if you want to create your own team!"
+
         }
 
         return root
