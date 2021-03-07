@@ -1,4 +1,4 @@
-package com.example.mypokedexapp.ui.pokedex
+package com.example.mypokedexapp.ui.team
 
 import android.view.LayoutInflater
 import android.view.View
@@ -13,28 +13,31 @@ import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.NetworkImageView
 import com.example.mypokedexapp.R
 import com.example.mypokedexapp.models.Pokemon
-import com.example.mypokedexapp.ui.pokedex.PokedexAdapter.PokedexViewHolder
+import com.example.mypokedexapp.ui.team.TeamAdapter.TeamViewHolder
 
-class PokedexAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon, PokedexViewHolder>(
+class TeamAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon, TeamViewHolder>(
     PokemonCompacter()
 ) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokedexViewHolder {
-        return PokedexViewHolder.create(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
+        return TeamViewHolder.create(parent)
     }
 
-    override fun onBindViewHolder(holder: PokedexViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current, imageLoader)
     }
 
-    class PokedexViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun removeAt(position: Int) {
+    }
+
+    class TeamViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var pokemonNumber = 0;
         private val pokemonName: TextView = itemView.findViewById(R.id.pokemonName)
         private val pokemonImage: NetworkImageView = itemView.findViewById(R.id.pokemonImage)
 
         init {
             itemView.setOnClickListener {
-                itemView.findNavController().navigate(R.id.action_navigation_pokedex_to_navigation_pokemon_detail, bundleOf("pokemonNumber" to pokemonNumber))
+                itemView.findNavController().navigate(R.id.action_navigation_team_to_navigation_pokemon_detail, bundleOf("pokemonNumber" to pokemonNumber))
             }
         }
 
@@ -45,9 +48,9 @@ class PokedexAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon
         }
 
         companion object {
-            fun create(parent: ViewGroup): PokedexViewHolder {
+            fun create(parent: ViewGroup): TeamViewHolder {
                 val view: View = LayoutInflater.from(parent.context).inflate(R.layout.pokemon_item, parent, false)
-                return PokedexViewHolder(view)
+                return TeamViewHolder(view)
             }
         }
     }
