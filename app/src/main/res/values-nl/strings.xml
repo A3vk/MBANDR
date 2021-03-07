@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mijn Pokedex App</string>
+    <string name="title_pokedex">Pokedex</string>
+    <string name="title_team">Team</string>
+    <string name="title_profile">Profiel</string>
+    <string name="title_settings">Instellingen</string>
+    <string name="title_pokemon_details">Pokemon Details</string>
+    <string name="placeholder">{{PLACEHOLDER}}</string>
+
+    <!--Pokemon Stat Names -->
+    <string name="hp">hp</string>
+    <string name="attack">aanval</string>
+    <string name="defence">verdediging</string>
+    <string name="special_attack">speciale-aanval</string>
+    <string name="special_defence">speciale-\nverdediging</string>
+    <string name="speed">snelheid</string>
+
+    <!--Pokemon Type Names -->
+    <string name="water">water</string>
+    <string name="fire">vuur</string>
+    <string name="grass">gras</string>
+    <string name="ground">grond</string>
+    <string name="rock">steen</string>
+    <string name="steel">staal</string>
+    <string name="ice">ijs</string>
+    <string name="electric">elektrisch</string>
+    <string name="dragon">draak</string>
+    <string name="ghost">geest</string>
+    <string name="psychic">psychisch</string>
+    <string name="normal">normaal</string>
+    <string name="fighting">vecht</string>
+    <string name="poison">gif</string>
+    <string name="bug">insect</string>
+    <string name="flying">vliegend</string>
+    <string name="dark">duister</string>
+    <string name="fairy">fee</string>
+
+    <!--Language Preference -->
+    <string-array name="language_preference_names">
+        <item>Engels</item>
+        <!--item>EN</item-->
+        <item>Nederlands</item>
+        <!--item>NL</item-->
+    </string-array>
+
+    <string-array name="language_preference_values">
+        <!--item>English</item-->
+        <item>en</item>
+        <!--item>Dutch</item-->
+        <item>nl</item>
+    </string-array>
+</resources>

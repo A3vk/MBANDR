@@ -1,5 +1,6 @@
 package com.example.mypokedexapp.ui.pokedex
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.android.volley.toolbox.NetworkImageView
 import com.example.mypokedexapp.R
 import com.example.mypokedexapp.models.Pokemon
 import com.example.mypokedexapp.ui.pokedex.PokedexAdapter.PokedexViewHolder
+import java.util.*
 
 class PokedexAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon, PokedexViewHolder>(
     PokemonCompacter()
@@ -38,9 +40,10 @@ class PokedexAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon
             }
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(pokemon: Pokemon, imageLoader: ImageLoader) {
             pokemonNumber = pokemon.number
-            pokemonName.text = "# ${pokemon.number} ${pokemon.name}"
+            pokemonName.text = "# ${pokemon.number} ${pokemon.name.capitalize(Locale.ROOT)}"
             pokemonImage.setImageUrl(pokemon.imageUrl, imageLoader)
         }
 

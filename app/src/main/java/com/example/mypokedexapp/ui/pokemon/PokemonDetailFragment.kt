@@ -1,5 +1,6 @@
 package com.example.mypokedexapp.ui.pokemon
 
+import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,10 +9,13 @@ import androidx.fragment.app.Fragment
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.children
 import androidx.core.view.get
+import androidx.preference.PreferenceManager
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.android.volley.toolbox.NetworkImageView
@@ -20,7 +24,6 @@ import com.example.mypokedexapp.R
 import com.example.mypokedexapp.ui.pokedex.PokedexViewModel
 import com.example.mypokedexapp.ui.pokedex.PokedexViewModelFactory
 import com.example.mypokedexapp.volley.BackendVolley
-import org.w3c.dom.Text
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -65,6 +68,9 @@ class PokemonDetailFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_pokemon_detail, container, false)
 
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
+        val color = sharedPref.getString("color_preference", "#000000")
+
         // Get all View elements
         val imageView: NetworkImageView = root.findViewById(R.id.pokemonImage)
         val pokemonNameView: TextView = root.findViewById(R.id.pokemonName)
@@ -80,10 +86,10 @@ class PokemonDetailFragment : Fragment() {
             val pokedexNumberString = "# ${pokemon.number}"
             pokedexNumberView.text = pokedexNumberString
 
-            primaryTypeView.text = pokemon.primaryType.name
+            primaryTypeView.text = resources.getString(resources.getIdentifier(pokemon.primaryType.name, "string", context?.packageName)).capitalize(Locale.ROOT)
             primaryTypeView.setBackgroundColor(Color.parseColor(pokemon.primaryType.color))
             if(pokemon.secondaryType != null) {
-                secondaryTypeView.text = pokemon.secondaryType!!.name
+                secondaryTypeView.text = resources.getString(resources.getIdentifier(pokemon.secondaryType!!.name, "string", context?.packageName)).capitalize(Locale.ROOT)
                 secondaryTypeView.setBackgroundColor(Color.parseColor(pokemon.secondaryType!!.color))
             }
 
@@ -94,9 +100,11 @@ class PokemonDetailFragment : Fragment() {
                 val valueBar = linearLayout[2] as ProgressBar
                 val stat = pokemon.getStatByIndex(index)
                 if(stat != null) {
-                    title.text = stat.name
+                    title.text = resources.getString(resources.getIdentifier(stat.name, "string", context?.packageName)).capitalize(Locale.ROOT)
                     value.text = stat.value.toString()
                     valueBar.progress = (stat.value / 255.0 * 100).roundToInt()
+                    val colorFilter =  BlendModeColorFilterCompat.createBlendModeColorFilterCompat(Color.parseColor(color), BlendModeCompat.SRC_ATOP)
+                    valueBar.progressDrawable.colorFilter = colorFilter
                 }
             }
         })
