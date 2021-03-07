@@ -3,16 +3,17 @@ package com.example.mypokedexapp.ui.pokemon
 import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.children
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.android.volley.toolbox.NetworkImageView
 import com.example.mypokedexapp.PokemonApplication
 import com.example.mypokedexapp.R
@@ -27,11 +28,41 @@ class PokemonDetailFragment : Fragment() {
     private val pokemonDetailViewModel: PokemonDetailViewModel by viewModels {
         PokemonDetailViewModelFactory((activity?.application as PokemonApplication).repository)
     }
+    private val maxTeamSize = 6
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().popBackStack()
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.pokemon_detail_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.pokemon_detail_menu_add -> {
+                if(pokemonDetailViewModel.numberOfPokemonInTeam < maxTeamSize) {
+                    pokemonDetailViewModel.addPokemonToTeam()
+                    Toast.makeText(activity, "Pokemon added to team!", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(activity, "Your team already has 6 pokemon!", Toast.LENGTH_SHORT).show()
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_pokemon_detail, container, false)
 
         // Get all View elements

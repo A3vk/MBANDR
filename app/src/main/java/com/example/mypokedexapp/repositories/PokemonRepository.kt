@@ -7,8 +7,10 @@ import com.example.mypokedexapp.room.PokemonDatabase
 import com.example.mypokedexapp.room.dao.PokemonDao
 import com.example.mypokedexapp.values.Endpoints
 import com.example.mypokedexapp.volley.ServiceVolley
+import kotlinx.coroutines.flow.Flow
 
 class PokemonRepository(private val pokemonDao: PokemonDao, private val serviceVolley: ServiceVolley) {
+    // Pokemon API
     fun getPokemonList(offset: Int, completionHandler: (onComplete: Pokemon) -> Unit){
         serviceVolley.get("${Endpoints.Pokemon.BASE}?offset=$offset&limit=20") { response ->
             if (response != null) {
@@ -32,13 +34,22 @@ class PokemonRepository(private val pokemonDao: PokemonDao, private val serviceV
         }
     }
 
+    // Local room database
+    val pokemonTeam: Flow<List<Pokemon>> = pokemonDao.getPokemonTeam()
+    val pokemonInTeam: Flow<Int> = pokemonDao.getNumberOfPokemonInTeam()
+
     @WorkerThread
     suspend fun savePokemon(pokemon: Pokemon) {
         pokemonDao.insertPokemon(pokemon)
     }
 
     @WorkerThread
-    suspend fun getSavedPokemon(number: Int): Pokemon? {
-        return pokemonDao.getPokemon(number)
+    suspend fun removeFromTeam(pokemon: Pokemon) {
+        if(pokemon.number < 0) {
+            pokemon.isInTeam = false
+            pokemonDao.updatePokemon(pokemon)
+        } else {
+            pokemonDao.deletePokemon(pokemon)
+        }
     }
 }

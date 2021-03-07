@@ -5,5 +5,16 @@
     <string name="title_profile">Profile</string>
     <string name="title_settings">Settings</string>
     <string name="title_pokemon_details">Pokemon Details</string>
+    <string name="pokemon_detail_menu_add">Add</string>
+    <string name="team_menu_share">Share</string>
+    <string name="team_no_pokemon">There are currently no pokemon in your team!</string>
     <string name="placeholder">{{PLACEHOLDER}}</string>
+    <string-array name="numbers">
+        <item>one</item>
+        <item>two</item>
+        <item>three</item>
+        <item>four</item>
+        <item>five</item>
+        <item>six</item>
+    </string-array>
 </resources>
