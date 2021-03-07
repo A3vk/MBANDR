@@ -1,10 +1,8 @@
 package com.example.mypokedexapp.ui.pokemon
 
-import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.ColorFilter
-import android.graphics.drawable.ColorDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,18 +12,15 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import androidx.core.view.children
 import androidx.core.view.get
-import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import com.android.volley.toolbox.NetworkImageView
 import com.example.mypokedexapp.R
-import com.example.mypokedexapp.models.Pokemon
 import com.example.mypokedexapp.volley.BackendVolley
-import org.w3c.dom.Text
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.math.round
 import kotlin.math.roundToInt
 
 class PokemonDetailFragment : Fragment(){
@@ -74,7 +69,8 @@ class PokemonDetailFragment : Fragment(){
                 title.text = stat.name
                 value.text = stat.value.toString()
                 valueBar.progress = (stat.value / 255.0 * 100).roundToInt()
-                valueBar.progressDrawable.setColorFilter(Color.parseColor(color), android.graphics.PorterDuff.Mode.SRC_IN)
+                val colorFilter=  BlendModeColorFilterCompat.createBlendModeColorFilterCompat(Color.parseColor(color), BlendModeCompat.SRC_ATOP)
+                valueBar.progressDrawable.colorFilter = colorFilter
             }
         })
 
