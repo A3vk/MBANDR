@@ -6,15 +6,7 @@ import com.example.mypokedexapp.repositories.PokemonRepository
 import kotlinx.coroutines.launch
 
 class PokemonCreateViewModel(private val pokemonRepository: PokemonRepository): ViewModel() {
-    val nextCustomPokemonId: LiveData<Int>
-        get() = _nextCustomPokemonId
-
-    private val _nextCustomPokemonId = MutableLiveData<Int>().apply{
-        viewModelScope.launch {
-            value = pokemonRepository.getNewCustomPokemonId()
-            println("HALLO IK BEN HIER!!!!!!!")
-        }
-    }
+    val nextCustomPokemonId = pokemonRepository.nextCustomPokemonId.asLiveData()
 
     fun saveCustomPokemon(pokemon: Pokemon){
         viewModelScope.launch {

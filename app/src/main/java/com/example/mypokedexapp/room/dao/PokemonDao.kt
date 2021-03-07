@@ -31,6 +31,6 @@ interface PokemonDao {
     suspend fun getPokemon(number: Int): Pokemon
 
     @Query("SELECT MIN(number) - 1 FROM pokemon")
-    suspend fun getNewCustomPokemonId() : Int
+    fun getNewCustomPokemonId() : Flow<Int>
 
 }

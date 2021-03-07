@@ -38,6 +38,7 @@ class PokemonRepository(private val pokemonDao: PokemonDao, private val serviceV
     val pokemonTeam: Flow<List<Pokemon>> = pokemonDao.getPokemonTeam()
     val pokemonInTeam: Flow<Int> = pokemonDao.getNumberOfPokemonInTeam()
     val customPokemon: Flow<List<Pokemon>> = pokemonDao.getAllCustomPokemon()
+    val nextCustomPokemonId: Flow<Int> = pokemonDao.getNewCustomPokemonId()
 
     @WorkerThread
     suspend fun savePokemon(pokemon: Pokemon) {
@@ -62,10 +63,5 @@ class PokemonRepository(private val pokemonDao: PokemonDao, private val serviceV
         } else {
             pokemonDao.deletePokemon(pokemon)
         }
-    }
-
-    @WorkerThread
-    suspend fun getNewCustomPokemonId() : Int{
-        return pokemonDao.getNewCustomPokemonId()
     }
 }

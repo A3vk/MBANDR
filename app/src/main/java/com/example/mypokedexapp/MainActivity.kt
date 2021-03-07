@@ -67,7 +67,6 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener{
         val colorStateList = ColorStateList(states, colors)
         navView.itemTextColor = colorStateList
         navView.itemIconTintList = colorStateList
-        println(navView.itemTextColor)
     }
 
     private fun setStatusBarColor(sharedPref: SharedPreferences) {

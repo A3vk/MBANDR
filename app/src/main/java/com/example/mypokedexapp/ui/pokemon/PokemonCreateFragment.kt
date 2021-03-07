@@ -17,13 +17,15 @@ class PokemonCreateFragment : Fragment() {
     private val pokemonCreateViewModel: PokemonCreateViewModel by viewModels {
         PokemonCreateViewModelFactory((activity?.application as PokemonApplication).repository)
     }
+    private var nextCustomPokemonId = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        println("HALLO IN BEN HET FRAGMENT")
         val root = inflater.inflate(R.layout.fragment_pokemon_create, container, false)
         val saveButton: Button = root.findViewById(R.id.pokemon_save_button)
+        pokemonCreateViewModel.nextCustomPokemonId.observe(viewLifecycleOwner){
+            nextCustomPokemonId = it
+        }
         saveButton.setOnClickListener{
-            println("IK BEN EEN BUTTON")
             pokemonCreateViewModel.saveCustomPokemon(createPokemon(root))
         }
         return root
@@ -34,7 +36,7 @@ class PokemonCreateFragment : Fragment() {
         //TODO implement images
         val image = "https://ucarecdn.com/68712676-976b-4966-92d8-b16694fcf261/anime-fans-nederland-amelia.png"
 
-        val id = pokemonCreateViewModel.nextCustomPokemonId.value!!
+        val id = nextCustomPokemonId
         val name = root.findViewById<EditText>(R.id.pokemon_name_input).text.toString()
         val hp = root.findViewById<EditText>(R.id.pokemon_hp_input).text.toString().toInt()
         val attack = root.findViewById<EditText>(R.id.pokemon_attack_input).text.toString().toInt()
