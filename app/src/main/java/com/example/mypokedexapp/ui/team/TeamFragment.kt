@@ -70,9 +70,7 @@ class TeamFragment : Fragment() {
             } else {
                 pokemonShareText = "There are no pokemon in my team :("
             }
-
         }
-
         return root
     }
 }

@@ -15,13 +15,20 @@ class PokemonDetailViewModel(private val pokemonRepository: PokemonRepository) :
     private val _pokemon = MutableLiveData<Pokemon>()
 
     fun setPokemon(id: Int) {
-        _pokemon.apply {
-            pokemonRepository.getPokemon(id) { pokemon ->
-                value = pokemon
+        if (id < 0 ){
+            viewModelScope.launch {
+                _pokemon.apply{
+                    value = pokemonRepository.getSavedPokemon(id)
+                }
             }
         }
-
-
+        else {
+            _pokemon.apply {
+                pokemonRepository.getPokemon(id) { pokemon ->
+                    value = pokemon
+                }
+            }
+        }
     }
 
     var numberOfPokemonInTeam = 0
