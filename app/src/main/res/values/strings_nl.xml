@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Pokemon Stat Names -->
+    <string name="stat_hp_nl">hp</string>
+    <string name="stat_attack_nl">aanval</string>
+    <string name="stat_defense_nl">verdediging</string>
+    <string name="stat_special_attack_nl">speciale-aanval</string>
+    <string name="stat_special_defense_nl">speciale-\nverdediging</string>
+    <string name="stat_speed_nl">snelheid</string>
+
+    <!--Pokemon Type Names -->
+    <string name="type_water_nl">water</string>
+    <string name="type_fire_nl">vuur</string>
+    <string name="type_grass_nl">gras</string>
+    <string name="type_ground_nl">grond</string>
+    <string name="type_rock_nl">steen</string>
+    <string name="type_steel_nl">staal</string>
+    <string name="type_ice_nl">ijs</string>
+    <string name="type_electric_nl">lektrisch</string>
+    <string name="type_dragon_nl">draak</string>
+    <string name="type_ghost_nl">geest</string>
+    <string name="type_psychic_nl">psychisch</string>
+    <string name="type_normal_nl">normaal</string>
+    <string name="type_fighting_nl">vecht</string>
+    <string name="type_poison_nl">gif</string>
+    <string name="type_bug_nl">insect</string>
+    <string name="type_flying_nl">vliegend</string>
+    <string name="type_dark_nl">duister</string>
+    <string name="type_fairy_nl">fee</string>
+
+</resources>

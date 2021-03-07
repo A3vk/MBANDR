@@ -5,12 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <ListPreference
+        android:key="language_preference"
+        android:title="Language "
+        android:entries="@array/language_preference_names"
+        android:entryValues="@array/language_preference_values"
+        android:summary="Choose the color language of the application"/>
+    />
+
     <ListPreference
         android:key="color_preference"
-        android:title="Kleur Thema"
+        android:title="Color Theme"
         android:entries="@array/color_preference_names"
         android:entryValues="@array/color_preference_values"
-        android:summary="kies een kleur voor het thema van de app"/>
+        android:summary="Choose the color theme for the app"/>
         />
-
 </PreferenceScreen>

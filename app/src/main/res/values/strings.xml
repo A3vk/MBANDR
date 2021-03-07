@@ -7,7 +7,46 @@
     <string name="title_pokemon_details">Pokemon Details</string>
     <string name="placeholder">{{PLACEHOLDER}}</string>
 
-    <!-- SharedPreferences Keys -->
-    <string name="color_preference">Color</string>
+    <!--Pokemon Stat Names -->
+    <string name="hp">hp</string>
+    <string name="attack">attack</string>
+    <string name="defense">defense</string>
+    <string name="special_attack">special-attack</string>
+    <string name="special_defense">special-defense</string>
+    <string name="speed">speed</string>
 
+    <!--Pokemon Type Names -->
+    <string name="type_water_en">water</string>
+    <string name="type_fire_en">fire</string>
+    <string name="type_grass_en">grass</string>
+    <string name="type_ground_en">ground</string>
+    <string name="type_rock_en">rock</string>
+    <string name="type_steel_en">steel</string>
+    <string name="type_ice_en">ice</string>
+    <string name="type_electric_en">electric</string>
+    <string name="type_dragon_en">dragon</string>
+    <string name="type_ghost_en">ghost</string>
+    <string name="type_psychic_en">psychic</string>
+    <string name="type_normal_en">normal</string>
+    <string name="type_fighting_en">fighting</string>
+    <string name="type_poison_en">poison</string>
+    <string name="type_bug_en">bug</string>
+    <string name="type_flying_en">flying</string>
+    <string name="type_dark_en">dark</string>
+    <string name="type_fairy_en">fairy</string>
+
+    <!--Language Preference -->
+    <string-array name="language_preference_names">
+        <item>English</item>
+        <!--item>EN</item-->
+        <item>Dutch</item>
+        <!--item>NL</item-->
+    </string-array>
+
+    <string-array name="language_preference_values">
+        <!--item>English</item-->
+        <item>EN</item>
+        <!--item>Dutch</item-->
+        <item>NL</item>
+    </string-array>
 </resources>
