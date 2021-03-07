@@ -1,19 +1,22 @@
 package com.example.mypokedexapp.ui.pokedex
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
 import com.example.mypokedexapp.models.Pokemon
+import com.example.mypokedexapp.models.Type
 import com.example.mypokedexapp.repositories.PokemonRepository
+import kotlinx.coroutines.launch
 
-class PokedexViewModel : ViewModel() {
-    private val pokemonRepository = PokemonRepository()
+class PokedexViewModel(private val repository: PokemonRepository): ViewModel() {
     private val offset = 20
     private var totalPokemon = 0
-    private var test = 0
+
+    val pokemon: LiveData<ArrayList<Pokemon>>
+        get() = _pokemon
+
     private val _pokemon = MutableLiveData<ArrayList<Pokemon>>().apply{
         value = ArrayList()
-        pokemonRepository.getPokemonList(totalPokemon) { pokemon ->
+        repository.getPokemonList(totalPokemon) { pokemon ->
             value?.add(pokemon)
             value?.sort()
             value = value
@@ -21,19 +24,26 @@ class PokedexViewModel : ViewModel() {
         totalPokemon += offset
     }
 
-    val pokemon: LiveData<ArrayList<Pokemon>>
-        get() = _pokemon
-
     fun getNextPokemon() {
         if (totalPokemon == _pokemon.value?.count()) {
-            test += 1
             _pokemon.apply {
-                pokemonRepository.getPokemonList(totalPokemon) { pokemon ->
+                repository.getPokemonList(totalPokemon) { pokemon ->
                     value?.add(pokemon)
                     value?.sort()
+                    value = value
                 }
             }
             totalPokemon += offset
         }
+    }
+}
+
+class PokedexViewModelFactory(private val repository: PokemonRepository) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(PokedexViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return PokedexViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

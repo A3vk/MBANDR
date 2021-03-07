@@ -1,10 +1,14 @@
 package com.example.mypokedexapp.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import org.json.JSONObject
 
-data class Type(var name: String, var color: String) {
+data class Type(
+    var name: String,
+    var color: String) {
     companion object {
-        val colors: HashMap<String, String> = hashMapOf(
+        val typeToColor: HashMap<String, String> = hashMapOf(
             "normal" to "#A8A77A",
             "fire" to "#EE8130",
             "water" to "#6390F0",
@@ -29,8 +33,19 @@ data class Type(var name: String, var color: String) {
             val name = json.getJSONObject("type").getString("name")
             return Type(
                 name,
-                colors[name].toString()
+                typeToColor[name].toString()
             )
+        }
+
+        fun getAllTypes(): List<String> {
+            return typeToColor.keys.toList()
+        }
+
+        fun getType(name: String): Type? {
+            if (typeToColor.containsKey(name)) {
+                return Type(name, typeToColor[name]!!)
+            }
+            return null
         }
     }
 }

@@ -32,14 +32,7 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         setBottomMenuColor(sharedPref)
         val navController = findNavController(R.id.nav_host_fragment)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_pokedex,
-                R.id.navigation_team,
-                R.id.navigation_profile,
-                R.id.navigation_settings
-            )
-        )
+        val appBarConfiguration = AppBarConfiguration(navView.menu)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
    }
