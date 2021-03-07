@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="first_preference_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ListPreference
+        android:key="language_preference"
+        android:title="Language "
+        android:entries="@array/language_preference_names"
+        android:entryValues="@array/language_preference_values"
+        android:summary="Choose the color language of the application"/>
+
+    <ListPreference
+        android:key="color_preference"
+        android:title="Color Theme"
+        android:entries="@array/color_preference_names"
+        android:entryValues="@array/color_preference_values"
+        android:summary="Choose the color theme for the app"/>
+</PreferenceScreen>

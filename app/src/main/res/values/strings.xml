@@ -10,6 +10,50 @@
     <string name="team_menu_share">Share</string>
     <string name="team_no_pokemon">There are currently no pokemon in your team!</string>
     <string name="placeholder">{{PLACEHOLDER}}</string>
+
+    <!--Pokemon Stat Names -->
+    <string name="hp">hp</string>
+    <string name="attack">attack</string>
+    <string name="defence">defense</string>
+    <string name="special_attack">special-attack</string>
+    <string name="special_defence">special-defense</string>
+    <string name="speed">speed</string>
+
+    <!--Pokemon Type Names -->
+    <string name="water">water</string>
+    <string name="fire">fire</string>
+    <string name="grass">grass</string>
+    <string name="ground">ground</string>
+    <string name="rock">rock</string>
+    <string name="steel">steel</string>
+    <string name="ice">ice</string>
+    <string name="electric">electric</string>
+    <string name="dragon">dragon</string>
+    <string name="ghost">ghost</string>
+    <string name="psychic">psychic</string>
+    <string name="normal">normal</string>
+    <string name="fighting">fighting</string>
+    <string name="poison">poison</string>
+    <string name="bug">bug</string>
+    <string name="flying">flying</string>
+    <string name="dark">dark</string>
+    <string name="fairy">fairy</string>
+
+    <!--Language Preference -->
+    <string-array name="language_preference_names">
+        <item>English</item>
+        <!--item>EN</item-->
+        <item>Dutch</item>
+        <!--item>NL</item-->
+    </string-array>
+
+    <string-array name="language_preference_values">
+        <!--item>English</item-->
+        <item>en</item>
+        <!--item>Dutch</item-->
+        <item>nl</item>
+    </string-array>
+
     <string-array name="numbers">
         <item>one</item>
         <item>two</item>
