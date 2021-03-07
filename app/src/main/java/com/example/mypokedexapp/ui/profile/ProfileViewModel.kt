@@ -7,8 +7,8 @@ import com.example.mypokedexapp.repositories.PokemonRepository
 import com.example.mypokedexapp.ui.pokemon.PokemonDetailViewModel
 import kotlinx.coroutines.launch
 
-class ProfileViewModel(private val repository: PokemonRepository) : ViewModel() {
-    val customPokemon: LiveData<List<Pokemon>> = repository.customPokemon.asLiveData()
+class ProfileViewModel(private val pokemonRepository: PokemonRepository) : ViewModel() {
+    val customPokemon: LiveData<List<Pokemon>> = pokemonRepository.customPokemon.asLiveData()
     private val _text = MutableLiveData<String>().apply {
         value = "This is profile Fragment"
     }
@@ -16,7 +16,14 @@ class ProfileViewModel(private val repository: PokemonRepository) : ViewModel() 
 
     fun addPokemon() = viewModelScope.launch {
         val pokemon = Pokemon(-1, "Carl", "https://ucarecdn.com/68712676-976b-4966-92d8-b16694fcf261/anime-fans-nederland-amelia.png", 5, 5, 5, 5, 5, 5, Type("fire", "#EE8130"),   Type("dark", "#705746"), false)
-        repository.savePokemon(pokemon)
+        pokemonRepository.savePokemon(pokemon)
+    }
+
+    fun removeCustomPokemon(index: Int){
+        val pokemon = customPokemon.value?.get(index)
+        viewModelScope.launch {
+            pokemonRepository.removeSavedPokemon(pokemon!!)
+        }
     }
 }
 

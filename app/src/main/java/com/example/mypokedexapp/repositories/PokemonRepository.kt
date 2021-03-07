@@ -50,6 +50,11 @@ class PokemonRepository(private val pokemonDao: PokemonDao, private val serviceV
     }
 
     @WorkerThread
+    suspend fun removeSavedPokemon(pokemon: Pokemon){
+        pokemonDao.deletePokemon(pokemon)
+    }
+
+    @WorkerThread
     suspend fun removeFromTeam(pokemon: Pokemon) {
         if(pokemon.number < 0) {
             pokemon.isInTeam = false

@@ -1,21 +1,16 @@
 package com.example.mypokedexapp.ui.profile
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.TextView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypokedexapp.PokemonApplication
 import com.example.mypokedexapp.R
-import com.example.mypokedexapp.ui.pokedex.PokedexViewModel
-import com.example.mypokedexapp.ui.pokemon.PokemonDetailViewModel
-import com.example.mypokedexapp.ui.pokemon.PokemonDetailViewModelFactory
-import com.example.mypokedexapp.ui.team.TeamAdapter
+import com.example.mypokedexapp.utils.SwipeToDeleteCallback
 
 class ProfileFragment : Fragment() {
     private val profileViewModel: ProfileViewModel by viewModels {
@@ -39,10 +34,13 @@ class ProfileFragment : Fragment() {
         recyclerview.adapter =adapter
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
 
-        val textView: TextView = root.findViewById(R.id.text_profile)
-        profileViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                profileViewModel.removeCustomPokemon(viewHolder.adapterPosition)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(recyclerview)
 
         profileViewModel.customPokemon.observe(viewLifecycleOwner)  { pokemon ->
             pokemon.let{ adapter.submitList(ArrayList(it)) }
@@ -53,7 +51,6 @@ class ProfileFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.profile_menu_next -> {
-                println("test")
                 findNavController().navigate(R.id.action_navigation_profile_to_fragment_pokemon_create)
                 true
             }

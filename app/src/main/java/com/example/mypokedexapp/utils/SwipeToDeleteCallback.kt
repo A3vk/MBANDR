@@ -1,4 +1,4 @@
-package com.example.mypokedexapp.ui.team
+package com.example.mypokedexapp.utils
 
 import android.content.Context
 import android.graphics.*
