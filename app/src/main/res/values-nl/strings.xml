@@ -6,6 +6,8 @@
     <string name="title_profile">Profiel</string>
     <string name="title_settings">Instellingen</string>
     <string name="title_pokemon_details">Pokemon Details</string>
+    <string name="pokemon_detail_toast_positive">De pokemon is toegevoegd aan het team!</string>
+    <string name="pokemon_detail_toast_negative">Je team heeft al %1$d pokemon!</string>
     <string name="pokemon_detail_menu_add">Toevoegen</string>
     <string name="team_menu_share">Delen</string>
     <string name="team_no_pokemon">Er bevinden zich op dit moment geen pokemon in je team!</string>

@@ -5,6 +5,8 @@
     <string name="title_profile">Profile</string>
     <string name="title_settings">Settings</string>
     <string name="title_pokemon_details">Pokemon Details</string>
+    <string name="pokemon_detail_toast_positive">Pokemon added to team!</string>
+    <string name="pokemon_detail_toast_negative">Your team already has %1$d pokemon!</string>
     <string name="pokemon_detail_menu_add">Add</string>
     <string name="team_menu_share">Share</string>
     <string name="team_no_pokemon">There are currently no pokemon in your team!</string>

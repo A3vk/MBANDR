@@ -33,18 +33,11 @@ class PokemonDetailFragment : Fragment() {
         PokemonDetailViewModelFactory((activity?.application as PokemonApplication).repository)
     }
     private val maxTeamSize = 6
+    private var numberOfPokemonInTeam = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-
-        val callback: OnBackPressedCallback =
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    findNavController().popBackStack()
-                }
-            }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -54,11 +47,11 @@ class PokemonDetailFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.pokemon_detail_menu_add -> {
-                if(pokemonDetailViewModel.numberOfPokemonInTeam < maxTeamSize) {
+                if(numberOfPokemonInTeam < maxTeamSize) {
                     pokemonDetailViewModel.addPokemonToTeam()
-                    Toast.makeText(activity, "Pokemon added to team!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, getString(R.string.pokemon_detail_toast_positive), Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(activity, "Your team already has 6 pokemon!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, getString(R.string.pokemon_detail_toast_negative, maxTeamSize), Toast.LENGTH_SHORT).show()
                 }
                 true
             }
@@ -68,6 +61,9 @@ class PokemonDetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_pokemon_detail, container, false)
+        pokemonDetailViewModel.numberOfPokemonInTeam.observe(viewLifecycleOwner) {
+            numberOfPokemonInTeam = it
+        }
 
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
         val color = sharedPref.getString("color_preference", "#000000")
