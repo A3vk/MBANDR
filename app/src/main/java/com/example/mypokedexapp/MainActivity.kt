@@ -11,6 +11,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.WindowManager
+import android.view.MenuItem
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -99,5 +101,16 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener{
         val configuration = Configuration(context.resources.configuration)
         configuration.setLocale(locale)
         return context.createConfigurationContext(configuration)
+    }
+
+    // Handle back button press
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

@@ -46,12 +46,6 @@ class PokedexFragment : Fragment() {
             }
         }
 
-
         return root
     }
-
-//    override fun onItemClick(position: Int) {
-//        val clickedPokemon = pokedexViewModel.pokemon.value?.get(position)
-//        findNavController().navigate(R.id.action_navigation_pokedex_to_pokemonDetailFragment, bundleOf("pokemonId" to clickedPokemon?.number))
-//    }
 }

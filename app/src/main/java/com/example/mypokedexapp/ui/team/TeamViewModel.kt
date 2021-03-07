@@ -1,17 +1,20 @@
 package com.example.mypokedexapp.ui.team
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
+import com.example.mypokedexapp.models.Pokemon
 import com.example.mypokedexapp.repositories.PokemonRepository
 import com.example.mypokedexapp.ui.profile.ProfileViewModel
+import kotlinx.coroutines.launch
 
 class TeamViewModel(private val pokemonRepository: PokemonRepository) : ViewModel() {
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is team Fragment"
+    val pokemonTeam: LiveData<List<Pokemon>> = pokemonRepository.pokemonTeam.asLiveData()
+
+    fun removePokemonFromTeam(index: Int) {
+        val pokemon = pokemonTeam.value?.get(index)
+        viewModelScope.launch {
+            pokemonRepository.removeFromTeam(pokemon!!)
+        }
     }
-    val text: LiveData<String> = _text
 }
 
 class TeamViewModelFactory(private val repository: PokemonRepository) : ViewModelProvider.Factory {

@@ -19,7 +19,11 @@
         android:id="@+id/navigation_team"
         android:name="com.example.mypokedexapp.ui.team.TeamFragment"
         android:label="@string/title_team"
-        tools:layout="@layout/fragment_team" />
+        tools:layout="@layout/fragment_team" >
+        <action
+            android:id="@+id/action_navigation_team_to_navigation_pokemon_detail"
+            app:destination="@id/navigation_pokemon_detail" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
