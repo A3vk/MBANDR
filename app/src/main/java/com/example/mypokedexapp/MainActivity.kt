@@ -1,18 +1,15 @@
 package com.example.mypokedexapp
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.res.ColorStateList
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.WindowManager
 import android.view.MenuItem
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -84,7 +81,6 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener{
                 updateColors(sharedPreferences!!)
             }
             PreferenceKeys.LANGUAGE -> {
-                updateBaseContextLocale(applicationContext)
                 recreate()
             }
         }

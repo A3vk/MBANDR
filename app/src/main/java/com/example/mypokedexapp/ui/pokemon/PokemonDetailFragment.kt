@@ -86,10 +86,10 @@ class PokemonDetailFragment : Fragment() {
             val pokedexNumberString = "# ${pokemon.number}"
             pokedexNumberView.text = pokedexNumberString
 
-            primaryTypeView.text = resources.getString(resources.getIdentifier(pokemon.primaryType.name, "string", context?.packageName))
+            primaryTypeView.text = resources.getString(resources.getIdentifier(pokemon.primaryType.name, "string", context?.packageName)).capitalize(Locale.ROOT)
             primaryTypeView.setBackgroundColor(Color.parseColor(pokemon.primaryType.color))
             if(pokemon.secondaryType != null) {
-                secondaryTypeView.text = resources.getString(resources.getIdentifier(pokemon.secondaryType!!.name, "string", context?.packageName))
+                secondaryTypeView.text = resources.getString(resources.getIdentifier(pokemon.secondaryType!!.name, "string", context?.packageName)).capitalize(Locale.ROOT)
                 secondaryTypeView.setBackgroundColor(Color.parseColor(pokemon.secondaryType!!.color))
             }
 
@@ -100,7 +100,7 @@ class PokemonDetailFragment : Fragment() {
                 val valueBar = linearLayout[2] as ProgressBar
                 val stat = pokemon.getStatByIndex(index)
                 if(stat != null) {
-                    title.text = resources.getString(resources.getIdentifier(stat.name, "string", context?.packageName))
+                    title.text = resources.getString(resources.getIdentifier(stat.name, "string", context?.packageName)).capitalize(Locale.ROOT)
                     value.text = stat.value.toString()
                     valueBar.progress = (stat.value / 255.0 * 100).roundToInt()
                     val colorFilter =  BlendModeColorFilterCompat.createBlendModeColorFilterCompat(Color.parseColor(color), BlendModeCompat.SRC_ATOP)

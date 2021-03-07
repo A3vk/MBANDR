@@ -51,6 +51,8 @@
         <item>en</item>
         <!--item>Dutch</item-->
         <item>nl</item>
+    </string-array>
+
     <string-array name="numbers">
         <item>one</item>
         <item>two</item>
