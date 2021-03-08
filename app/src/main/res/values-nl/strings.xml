@@ -37,10 +37,12 @@
     <string name="fairy">fee</string>
 
     <!--Create Pokemon -->
-    <string name="pokemon_name">Naam</string>
-    <string name="pokemon_primary_type">Primair Type</string>
-    <string name="pokemon_secondary_type">Secundair Type</string>
-    <string name="pokemon_save_button">Pokemon Opslaan</string>
+    <string name="create_pokemon_name">Naam</string>
+    <string name="create_pokemon_primary_type">Primair Type</string>
+    <string name="create_pokemon_secondary_type">Secundair Type</string>
+    <string name="create_pokemon_save_button">Pokemon Opslaan</string>
+    <string name="create_pokemon_image_from_directory_button">Get Image From Gallery </string>
+    <string name="create_pokemon_image_from_camera_button">Get Image From Camera</string>
 
     <!--Language Preference -->
     <string-array name="language_preference_names">

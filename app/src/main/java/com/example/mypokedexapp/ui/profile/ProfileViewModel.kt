@@ -14,11 +14,6 @@ class ProfileViewModel(private val pokemonRepository: PokemonRepository) : ViewM
     }
     val text: LiveData<String> = _text
 
-    fun addPokemon() = viewModelScope.launch {
-        val pokemon = Pokemon(-1, "Carl", "https://ucarecdn.com/68712676-976b-4966-92d8-b16694fcf261/anime-fans-nederland-amelia.png", 5, 5, 5, 5, 5, 5, Type("fire", "#EE8130"),   Type("dark", "#705746"), false)
-        pokemonRepository.savePokemon(pokemon)
-    }
-
     fun removeCustomPokemon(index: Int){
         val pokemon = customPokemon.value?.get(index)
         viewModelScope.launch {

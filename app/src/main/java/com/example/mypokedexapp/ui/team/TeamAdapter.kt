@@ -28,9 +28,6 @@ class TeamAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon, T
         holder.bind(current, imageLoader)
     }
 
-    fun removeAt(position: Int) {
-    }
-
     class TeamViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var pokemonNumber = 0;
         private val pokemonName: TextView = itemView.findViewById(R.id.pokemonName)

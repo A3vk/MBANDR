@@ -1,8 +1,12 @@
 package com.example.mypokedexapp.ui.profile
 
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
@@ -41,7 +45,14 @@ class ProfileAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon
         fun bind(pokemon: Pokemon, imageLoader: ImageLoader) {
             pokemonNumber = pokemon.number
             pokemonName.text = "# ${pokemon.number} ${pokemon.name}"
-            pokemonImage.setImageUrl(pokemon.imageUrl, imageLoader)
+
+            val base64 = pokemon.imageUrl
+            println(pokemon.imageUrl)
+            val decodedString = Base64.decode(base64.substring(base64.indexOf(",") + 1), Base64.DEFAULT);
+            val bitMap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            pokemonImage.setImageBitmap(bitMap)
+            val testImage = itemView.findViewById<ImageView>(R.id.custom_pokemon_image)
+            testImage.setImageBitmap(bitMap)
         }
 
         companion object {

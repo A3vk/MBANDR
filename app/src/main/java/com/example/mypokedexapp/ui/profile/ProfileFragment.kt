@@ -2,6 +2,8 @@ package com.example.mypokedexapp.ui.profile
 
 import android.os.Bundle
 import android.view.*
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -27,12 +29,12 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        profileViewModel.addPokemon()
         val root = inflater.inflate(R.layout.fragment_profile, container, false)
         val recyclerview = root.findViewById<RecyclerView>(R.id.recycler_view_pokemon)
         val adapter = ProfileAdapter((activity?.application as PokemonApplication).imageLoader)
         recyclerview.adapter =adapter
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
+
 
         val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {

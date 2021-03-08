@@ -9,4 +9,26 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
+    <!-- Create Pokemon -->
+    <string-array name="pokemon_type_array">
+        <item name="water">water</item>
+        <item name="fire">fire</item>
+        <item name="grass">grass</item>
+        <item name="ground">ground</item>
+        <item name="rock">rock</item>
+        <item name="steel">steel</item>
+        <item name="ice">ice</item>
+        <item name="electric">electric</item>
+        <item name="dragon">dragon</item>
+        <item name="ghost">ghost</item>
+        <item name="psychic">psychic</item>
+        <item name="normal">normal</item>
+        <item name="fighting">fighting</item>
+        <item name="poison">poison</item>
+        <item name="bug">bug</item>
+        <item name="flying">flying</item>
+        <item name="dark">dark</item>
+        <item name="fairy">fairy</item>
+    </string-array>
 </resources>

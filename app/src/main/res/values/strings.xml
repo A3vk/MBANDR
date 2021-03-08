@@ -40,10 +40,14 @@
     <string name="fairy">fairy</string>
 
     <!--Create Pokemon -->
-    <string name="pokemon_name">Name</string>
-    <string name="pokemon_primary_type">Primary Type</string>
-    <string name="pokemon_secondary_type">Secondary Type</string>
-    <string name="pokemon_save_button">Save Pokemon</string>
+    <string name="create_pokemon_name">Name</string>
+    <string name="create_pokemon_primary_type">Primary Type</string>
+    <string name="create_pokemon_secondary_type">Secondary Type</string>
+    <string name="create_pokemon_save_button">Save Pokemon</string>
+    <string name="create_pokemon_image_from_directory_button">Get Image From Gallery </string>
+    <string name="create_pokemon_image_from_camera_button">Get Image From Camera</string>
+
+
 
     <!--Language Preference -->
     <string-array name="language_preference_names">
