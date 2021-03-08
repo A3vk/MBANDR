@@ -6,6 +6,7 @@ import android.content.Intent
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
@@ -15,21 +16,23 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.mypokedexapp.PokemonApplication
 import com.example.mypokedexapp.R
 import com.example.mypokedexapp.models.Pokemon
 import com.example.mypokedexapp.models.Type
 import java.io.*
-import java.net.URL
 
 
 class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
-    private val pokemonCreateViewModel: PokemonCreateViewModel by viewModels {
-        PokemonCreateViewModelFactory((activity?.application as PokemonApplication).repository)
-    }
     companion object{
         const val PICK_IMAGE = 1
     }
+
+    private val pokemonCreateViewModel: PokemonCreateViewModel by viewModels {
+        PokemonCreateViewModelFactory((activity?.application as PokemonApplication).repository)
+    }
+
     private var nextCustomPokemonId = 0
     private var pokemonPrimaryType = ""
     private var pokemonSecondaryType: String? = null
@@ -42,7 +45,7 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         val saveButton: Button = root.findViewById(R.id.create_pokemon_save_button)
         pokemonCreateViewModel.nextCustomPokemonId.observe(viewLifecycleOwner){
-            nextCustomPokemonId = it
+            nextCustomPokemonId = it ?: -1
         }
         saveButton.setOnClickListener{
             pokemonCreateViewModel.saveCustomPokemon(createPokemon(root))
@@ -77,10 +80,8 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
         val imageFromCamera: Button = root.findViewById(R.id.image_from_camera_button)
         imageFromCamera.setOnClickListener {
-
+            findNavController().navigate(R.id.action_navigation_pokemon_create_to_fragment_camera)
         }
-
-
         return root
     }
 
@@ -121,30 +122,40 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
-            if (data == null) {
-                //Display an error
-                return;
+        if(resultCode == RESULT_OK){
+            when(requestCode){
+                PICK_IMAGE -> setCustomPokemonImage(data)
             }
-//            val inputStream: InputStream = requireContext().contentResolver.openInputStream(data.data!!)!!
-            val uri = data.data!!
-
-            var bitmap: Bitmap ?= null
-            try {
-                val inputStream = requireContext().contentResolver.openInputStream(uri)
-                bitmap = BitmapFactory.decodeStream(inputStream)
-                // close stream
-                try {
-                    inputStream?.close()
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-
-            }catch (e: FileNotFoundException){}
-            val base64 = bitmapToBase64(bitmap!!)
-            pokemonFileName = base64!!
-            pokemonImage.setImageURI(data.data)
         }
+    }
+
+    private fun setCustomPokemonImage(data: Intent?){
+        if(data == null){
+            return
+        }
+
+        val uri = data.data
+        val bitmap = getBitmap(uri!!)
+        val base64 = bitmapToBase64(bitmap!!)
+        pokemonFileName = base64!!
+        pokemonImage.setImageURI(uri)
+    }
+
+    private fun getBitmap(uri: Uri): Bitmap? {
+        var bitmap: Bitmap ?= null
+        try {
+            val inputStream = requireContext().contentResolver.openInputStream(uri)
+            bitmap = BitmapFactory.decodeStream(inputStream)
+            // close stream
+            try {
+                inputStream?.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+
+        }catch (e: FileNotFoundException){}
+
+        return bitmap
     }
 
     private fun bitmapToBase64(bitmap: Bitmap): String? {

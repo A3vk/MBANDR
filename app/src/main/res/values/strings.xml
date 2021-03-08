@@ -48,7 +48,6 @@
     <string name="create_pokemon_image_from_camera_button">Get Image From Camera</string>
 
 
-
     <!--Language Preference -->
     <string-array name="language_preference_names">
         <item>English</item>

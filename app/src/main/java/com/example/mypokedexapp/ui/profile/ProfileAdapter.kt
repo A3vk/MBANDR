@@ -35,6 +35,7 @@ class ProfileAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon
         private var pokemonNumber = 0;
         private val pokemonName: TextView = itemView.findViewById(R.id.pokemonName)
         private val pokemonImage: NetworkImageView = itemView.findViewById(R.id.pokemonImage)
+        private val pokemonCustomImage = itemView.findViewById<ImageView>(R.id.custom_pokemon_image)
 
         init {
             itemView.setOnClickListener {
@@ -47,12 +48,10 @@ class ProfileAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon
             pokemonName.text = "# ${pokemon.number} ${pokemon.name}"
 
             val base64 = pokemon.imageUrl
-            println(pokemon.imageUrl)
             val decodedString = Base64.decode(base64.substring(base64.indexOf(",") + 1), Base64.DEFAULT);
             val bitMap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
             pokemonImage.setImageBitmap(bitMap)
-            val testImage = itemView.findViewById<ImageView>(R.id.custom_pokemon_image)
-            testImage.setImageBitmap(bitMap)
+            pokemonCustomImage.setImageBitmap(bitMap)
         }
 
         companion object {

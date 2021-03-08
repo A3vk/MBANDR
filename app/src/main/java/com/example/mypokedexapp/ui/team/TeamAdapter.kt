@@ -1,8 +1,11 @@
 package com.example.mypokedexapp.ui.team
 
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
@@ -11,6 +14,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.NetworkImageView
+import com.example.mypokedexapp.PokemonApplication
 import com.example.mypokedexapp.R
 import com.example.mypokedexapp.models.Pokemon
 import com.example.mypokedexapp.ui.team.TeamAdapter.TeamViewHolder
@@ -32,6 +36,7 @@ class TeamAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon, T
         private var pokemonNumber = 0;
         private val pokemonName: TextView = itemView.findViewById(R.id.pokemonName)
         private val pokemonImage: NetworkImageView = itemView.findViewById(R.id.pokemonImage)
+        private val pokemonCustomImage: ImageView = itemView.findViewById(R.id.custom_pokemon_image)
 
         init {
             itemView.setOnClickListener {
@@ -42,7 +47,15 @@ class TeamAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon, T
         fun bind(pokemon: Pokemon, imageLoader: ImageLoader) {
             pokemonNumber = pokemon.number
             pokemonName.text = "# ${pokemon.number} ${pokemon.name.capitalize(Locale.ROOT)}"
-            pokemonImage.setImageUrl(pokemon.imageUrl, imageLoader)
+            if(pokemon.imageUrl.startsWith("http", true)){
+                pokemonImage.setImageUrl(pokemon.imageUrl, imageLoader)
+            } else{
+                val base64 = pokemon.imageUrl
+                val decodedString = Base64.decode(pokemon.imageUrl.substring(base64.indexOf(",") + 1), Base64.DEFAULT);
+                val bitMap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                pokemonCustomImage.setImageBitmap(bitMap)
+            }
+
         }
 
         companion object {
