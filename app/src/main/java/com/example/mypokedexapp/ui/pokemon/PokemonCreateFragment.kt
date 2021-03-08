@@ -1,7 +1,9 @@
 package com.example.mypokedexapp.ui.pokemon
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
@@ -13,6 +15,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,6 +26,7 @@ import com.example.mypokedexapp.PokemonApplication
 import com.example.mypokedexapp.R
 import com.example.mypokedexapp.models.Pokemon
 import com.example.mypokedexapp.models.Type
+import com.example.mypokedexapp.ui.camera.CameraFragment
 import com.example.mypokedexapp.utils.ImageHelper
 import java.io.*
 
@@ -94,9 +100,22 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
             startActivityForResult(chooserIntent, PICK_IMAGE)
         }
+
+        val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                findNavController().navigate(R.id.action_navigation_pokemon_create_to_fragment_camera)
+            } else {
+                Toast.makeText(requireContext(), resources.getString(R.string.camera_permission_error), Toast.LENGTH_SHORT ).show()
+            }
+        }
+
         val imageFromCamera: Button = root.findViewById(R.id.image_from_camera_button)
         imageFromCamera.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_pokemon_create_to_fragment_camera)
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                findNavController().navigate(R.id.action_navigation_pokemon_create_to_fragment_camera)
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+            }
         }
         return root
     }
@@ -177,7 +196,6 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
         try {
             val inputStream = requireContext().contentResolver.openInputStream(uri)
             bitmap = BitmapFactory.decodeStream(inputStream)
-            // close stream
             try {
                 inputStream?.close()
             } catch (e: IOException) {

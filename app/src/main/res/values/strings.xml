@@ -68,4 +68,6 @@
     <string name="colorpicker_button_select">Select</string>
     <string name="colorpicker_hash" translatable="false">#</string>
     <string name="colorpicker_error">Hex Code Format incorrect</string>
+
+    <string name="camera_permission_error">Permissions not granted by the user.</string>
 </resources>

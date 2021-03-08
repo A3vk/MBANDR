@@ -66,4 +66,6 @@
 
     <string name="colorpicker_button_select">Selecteer</string>
     <string name="colorpicker_error">Hex Code is incorrect</string>
+
+    <string name="camera_permission_error">De rechten zijn niet toegekend door de gebruiker.</string>
 </resources>

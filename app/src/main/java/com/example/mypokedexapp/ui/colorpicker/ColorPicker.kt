@@ -38,7 +38,6 @@ class ColorPicker(private val activity: Activity): Dialog(activity), SeekBar.OnS
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.color_picker)
 
         colorView = findViewById(R.id.colorView)
@@ -55,8 +54,6 @@ class ColorPicker(private val activity: Activity): Dialog(activity), SeekBar.OnS
         hexCode.setOnEditorActionListener { v, actionId, event ->
             if(actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE || event.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER) {
                 updateColorView(v.text.toString())
-                val inputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.hideSoftInputFromWindow(hexCode.windowToken, 0)
                 true
             } else {
                 false
