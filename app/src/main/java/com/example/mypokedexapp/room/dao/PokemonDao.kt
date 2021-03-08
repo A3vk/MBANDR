@@ -28,5 +28,9 @@ interface PokemonDao {
     fun getNumberOfPokemonInTeam(): Flow<Int>
 
     @Query("SELECT * FROM pokemon WHERE number = :number LIMIT 1")
-    fun getPokemon(number: Int): Flow<Pokemon>
+    suspend fun getPokemon(number: Int): Pokemon
+
+    @Query("SELECT MIN(number) - 1 FROM pokemon")
+    fun getNewCustomPokemonId() : Flow<Int>
+
 }

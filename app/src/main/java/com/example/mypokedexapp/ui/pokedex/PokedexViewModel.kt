@@ -1,13 +1,10 @@
 package com.example.mypokedexapp.ui.pokedex
 
-import android.app.Application
 import androidx.lifecycle.*
 import com.example.mypokedexapp.models.Pokemon
-import com.example.mypokedexapp.models.Type
 import com.example.mypokedexapp.repositories.PokemonRepository
-import kotlinx.coroutines.launch
 
-class PokedexViewModel(private val repository: PokemonRepository): ViewModel() {
+class PokedexViewModel(private val pokemonRepository: PokemonRepository): ViewModel() {
     private val offset = 20
     private var totalPokemon = 0
 
@@ -16,7 +13,7 @@ class PokedexViewModel(private val repository: PokemonRepository): ViewModel() {
 
     private val _pokemon = MutableLiveData<ArrayList<Pokemon>>().apply{
         value = ArrayList()
-        repository.getPokemonList(totalPokemon) { pokemon ->
+        pokemonRepository.getPokemonList(totalPokemon) { pokemon ->
             value?.add(pokemon)
             value?.sort()
             value = value
@@ -27,7 +24,7 @@ class PokedexViewModel(private val repository: PokemonRepository): ViewModel() {
     fun getNextPokemon() {
         if (totalPokemon == _pokemon.value?.count()) {
             _pokemon.apply {
-                repository.getPokemonList(totalPokemon) { pokemon ->
+                pokemonRepository.getPokemonList(totalPokemon) { pokemon ->
                     value?.add(pokemon)
                     value?.sort()
                     value = value

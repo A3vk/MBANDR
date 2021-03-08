@@ -37,10 +37,22 @@ class PokemonRepository(private val pokemonDao: PokemonDao, private val serviceV
     // Local room database
     val pokemonTeam: Flow<List<Pokemon>> = pokemonDao.getPokemonTeam()
     val pokemonInTeam: Flow<Int> = pokemonDao.getNumberOfPokemonInTeam()
+    val customPokemon: Flow<List<Pokemon>> = pokemonDao.getAllCustomPokemon()
+    val nextCustomPokemonId: Flow<Int> = pokemonDao.getNewCustomPokemonId()
 
     @WorkerThread
     suspend fun savePokemon(pokemon: Pokemon) {
         pokemonDao.insertPokemon(pokemon)
+    }
+
+    @WorkerThread
+    suspend fun getSavedPokemon(number: Int): Pokemon {
+        return pokemonDao.getPokemon(number)
+    }
+
+    @WorkerThread
+    suspend fun removeSavedPokemon(pokemon: Pokemon){
+        pokemonDao.deletePokemon(pokemon)
     }
 
     @WorkerThread

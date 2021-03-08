@@ -1,30 +1,24 @@
 package com.example.mypokedexapp.ui.pokemon
 
+import android.graphics.BitmapFactory
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.graphics.Color
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Base64
 import android.view.*
+import android.widget.*
 import androidx.fragment.app.Fragment
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.core.view.children
 import androidx.core.view.get
 import androidx.preference.PreferenceManager
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.android.volley.toolbox.NetworkImageView
 import com.example.mypokedexapp.PokemonApplication
 import com.example.mypokedexapp.R
-import com.example.mypokedexapp.ui.pokedex.PokedexViewModel
-import com.example.mypokedexapp.ui.pokedex.PokedexViewModelFactory
-import com.example.mypokedexapp.volley.BackendVolley
+import com.example.mypokedexapp.utils.ImageHelper
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -70,6 +64,7 @@ class PokemonDetailFragment : Fragment() {
 
         // Get all View elements
         val imageView: NetworkImageView = root.findViewById(R.id.pokemonImage)
+        val customImageView: ImageView = root.findViewById(R.id.custom_pokemon_image)
         val pokemonNameView: TextView = root.findViewById(R.id.pokemonName)
         val pokedexNumberView: TextView = root.findViewById(R.id.pokemonId)
         val primaryTypeView: TextView = root.findViewById(R.id.primaryType)
@@ -78,7 +73,13 @@ class PokemonDetailFragment : Fragment() {
 
         pokemonDetailViewModel.setPokemon(arguments?.get("pokemonNumber") as Int)
         pokemonDetailViewModel.pokemon.observe(viewLifecycleOwner, { pokemon ->
-            imageView.setImageUrl(pokemon.imageUrl, (activity?.application as PokemonApplication).imageLoader)
+            if(pokemon.imageUrl.startsWith("http", true)){
+                imageView.setImageUrl(pokemon.imageUrl, (activity?.application as PokemonApplication).imageLoader)
+            } else{
+                val bitMap = ImageHelper.base64ToBitmap(pokemon.imageUrl)
+                customImageView.setImageBitmap(bitMap)
+            }
+
             pokemonNameView.text = pokemon.name.capitalize(Locale.ROOT)
             val pokedexNumberString = "# ${pokemon.number}"
             pokedexNumberView.text = pokedexNumberString

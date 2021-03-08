@@ -17,7 +17,7 @@
     <string name="attack">attack</string>
     <string name="defence">defense</string>
     <string name="special_attack">special-attack</string>
-    <string name="special_defence">special-defense</string>
+    <string name="special_defence">special-\ndefense</string>
     <string name="speed">speed</string>
 
     <!--Pokemon Type Names -->
@@ -39,6 +39,18 @@
     <string name="flying">flying</string>
     <string name="dark">dark</string>
     <string name="fairy">fairy</string>
+
+    <!--Create Pokemon -->
+    <string name="create_pokemon_name">Name</string>
+    <string name="create_pokemon_primary_type">Primary Type</string>
+    <string name="create_pokemon_secondary_type">Secondary Type</string>
+    <string name="create_pokemon_save_button">Save Pokemon</string>
+    <string name="create_pokemon_image_from_directory_button">Get Image From Gallery </string>
+    <string name="create_pokemon_image_from_camera_button">Get Image From Camera</string>
+    <string name="create_pokemon_error_toast">Pokemon data is invalid</string>
+    <string name="fragment_pokemon_create">Create Pokemon</string>
+    <string name="fragment_camera">Camera</string>
+
 
     <!--Language Preference -->
     <string name="language_preference">Language</string>

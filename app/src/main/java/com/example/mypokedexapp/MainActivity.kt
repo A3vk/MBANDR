@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.res.ColorStateList
 import android.content.res.Configuration
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -23,6 +24,10 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
+    companion object {
+        var bitmap: Bitmap? = null
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -61,13 +66,12 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
 
         val colors = intArrayOf(
             Color.parseColor(color),
-            R.color.design_default_color_primary
+            ColorHelper.darken(Color.parseColor(color), 0.3F)
         )
 
         val colorStateList = ColorStateList(states, colors)
         navView.itemTextColor = colorStateList
         navView.itemIconTintList = colorStateList
-        println(navView.itemTextColor)
     }
 
     private fun setStatusBarColor(sharedPref: SharedPreferences) {

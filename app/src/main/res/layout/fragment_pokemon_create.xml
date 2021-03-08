@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.pokemon.PokemonCreateFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pokemon_name_label"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:labelFor="@+id/pokemon_name_input"
+                android:text="@string/create_pokemon_name" />
+
+            <EditText
+                android:id="@+id/pokemon_name_input"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:autofillHints="pokemonName"
+                android:ems="10"
+                android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pokemon_hp_label"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:labelFor="@+id/pokemon_hp_input"
+                android:text="@string/hp" />
+
+            <EditText
+                android:id="@+id/pokemon_hp_input"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:autofillHints="pokemonHp"
+                android:ems="10"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pokemon_attack_label"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:labelFor="@+id/pokemon_attack_input"
+                android:text="@string/attack" />
+
+            <EditText
+                android:id="@+id/pokemon_attack_input"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:autofillHints="pokemonAttack"
+                android:ems="10"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pokemon_defence_label"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:labelFor="@+id/pokemon_defence_input"
+                android:text="@string/defence" />
+
+            <EditText
+                android:id="@+id/pokemon_defence_input"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:autofillHints="pokemonDefence"
+                android:ems="10"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pokemon_special_attack_label"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:labelFor="@+id/pokemon_special_attack_input"
+                android:text="@string/special_attack" />
+
+            <EditText
+                android:id="@+id/pokemon_special_attack_input"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:autofillHints="pokemonSpecialAttack"
+                android:ems="10"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pokemon_special_defence_label"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:labelFor="@+id/pokemon_special_defence_input"
+                android:text="@string/special_defence" />
+
+            <EditText
+                android:id="@+id/pokemon_special_defence_input"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:autofillHints="pokemonSpecialDefence"
+                android:ems="10"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pokemon_speed_label"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:labelFor="@+id/pokemon_speed_input"
+                android:text="@string/speed" />
+
+            <EditText
+                android:id="@+id/pokemon_speed_input"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:autofillHints="pokemonSpeed"
+                android:ems="10"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pokemon_primary_type_label"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:labelFor="@+id/pokemon_primary_type_input"
+                android:text="@string/create_pokemon_primary_type" />
+
+            <Spinner
+                android:id="@+id/pokemon_primary_type_input"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pokemon_secondary_type_label"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:labelFor="@+id/pokemon_secondary_type_input"
+                android:text="@string/create_pokemon_secondary_type" />
+
+            <Spinner
+                android:id="@+id/pokemon_secondary_type_input"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/create_pokemon_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/image_from_directory_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:text="@string/create_pokemon_image_from_directory_button" />
+
+                <Button
+                    android:id="@+id/image_from_camera_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:text="@string/create_pokemon_image_from_camera_button" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/create_pokemon_save_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/create_pokemon_save_button" />
+
+    </LinearLayout>
+</ScrollView>

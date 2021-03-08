@@ -2,6 +2,7 @@ package com.example.mypokedexapp.volley
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import org.json.JSONObject
@@ -14,7 +15,7 @@ class ServiceVolley(private val context: Context) : IServiceVolley {
                 completionHandler(response)
             },
             { error ->
-                // TODO: Handle error
+                Log.e("ServiceVolleyGet", "An error occurred: ${error.message}", error)
                 completionHandler(null)
             }
         )

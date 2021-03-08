@@ -1,4 +1,4 @@
-package com.example.mypokedexapp.ui.team
+package com.example.mypokedexapp.ui.profile
 
 import android.view.LayoutInflater
 import android.view.View
@@ -14,50 +14,44 @@ import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.NetworkImageView
 import com.example.mypokedexapp.R
 import com.example.mypokedexapp.models.Pokemon
-import com.example.mypokedexapp.ui.team.TeamAdapter.TeamViewHolder
+import com.example.mypokedexapp.ui.profile.ProfileAdapter.ProfileViewHolder
 import com.example.mypokedexapp.utils.ImageHelper
-import java.util.*
 
-class TeamAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon, TeamViewHolder>(
-    PokemonCompacter()
-) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
-        return TeamViewHolder.create(parent)
+class ProfileAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon, ProfileViewHolder>(PokemonCompacter()) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
+        return ProfileViewHolder.create(parent)
     }
 
-    override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current, imageLoader)
     }
 
-    class TeamViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ProfileViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var pokemonNumber = 0;
         private val pokemonName: TextView = itemView.findViewById(R.id.pokemonName)
         private val pokemonImage: NetworkImageView = itemView.findViewById(R.id.pokemonImage)
-        private val pokemonCustomImage: ImageView = itemView.findViewById(R.id.custom_pokemon_image)
+        private val pokemonCustomImage = itemView.findViewById<ImageView>(R.id.custom_pokemon_image)
 
         init {
             itemView.setOnClickListener {
-                itemView.findNavController().navigate(R.id.action_navigation_team_to_navigation_pokemon_detail, bundleOf("pokemonNumber" to pokemonNumber))
+                itemView.findNavController().navigate(R.id.action_navigation_profile_to_navigation_pokemon_detail, bundleOf("pokemonNumber" to pokemonNumber))
             }
         }
 
         fun bind(pokemon: Pokemon, imageLoader: ImageLoader) {
             pokemonNumber = pokemon.number
-            pokemonName.text = "# ${pokemon.number} ${pokemon.name.capitalize(Locale.ROOT)}"
-            if(pokemon.imageUrl.startsWith("http", true)){
-                pokemonImage.setImageUrl(pokemon.imageUrl, imageLoader)
-            } else{
-                val bitMap = ImageHelper.base64ToBitmap(pokemon.imageUrl)
-                pokemonCustomImage.setImageBitmap(bitMap)
-            }
+            pokemonName.text = "# ${pokemon.number} ${pokemon.name}"
 
+            val bitMap = ImageHelper.base64ToBitmap(pokemon.imageUrl)
+            pokemonImage.setImageBitmap(bitMap)
+            pokemonCustomImage.setImageBitmap(bitMap)
         }
 
         companion object {
-            fun create(parent: ViewGroup): TeamViewHolder {
+            fun create(parent: ViewGroup): ProfileViewHolder{
                 val view: View = LayoutInflater.from(parent.context).inflate(R.layout.pokemon_item, parent, false)
-                return TeamViewHolder(view)
+                return ProfileViewHolder(view)
             }
         }
     }
@@ -72,3 +66,6 @@ class TeamAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon, T
         }
     }
 }
+
+
+

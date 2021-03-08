@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypokedexapp.PokemonApplication
 import com.example.mypokedexapp.R
-import com.example.mypokedexapp.ui.pokedex.PokedexAdapter
+import com.example.mypokedexapp.utils.SwipeToDeleteCallback
 
 class TeamFragment : Fragment() {
     private val teamViewModel: TeamViewModel by viewModels {
@@ -71,7 +71,6 @@ class TeamFragment : Fragment() {
                 pokemonShareText = getString(R.string.share_ending)
             }
         }
-
         return root
     }
 }

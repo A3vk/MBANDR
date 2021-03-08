@@ -2,6 +2,7 @@ package com.example.mypokedexapp.ui.team
 
 import androidx.lifecycle.*
 import com.example.mypokedexapp.models.Pokemon
+import com.example.mypokedexapp.models.Type
 import com.example.mypokedexapp.repositories.PokemonRepository
 import com.example.mypokedexapp.ui.profile.ProfileViewModel
 import kotlinx.coroutines.launch
