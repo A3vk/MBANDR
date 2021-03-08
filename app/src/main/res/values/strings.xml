@@ -18,7 +18,7 @@
     <string name="attack">attack</string>
     <string name="defence">defense</string>
     <string name="special_attack">special-attack</string>
-    <string name="special_defence">special-defense</string>
+    <string name="special_defence">special-\ndefense</string>
     <string name="speed">speed</string>
 
     <!--Pokemon Type Names -->

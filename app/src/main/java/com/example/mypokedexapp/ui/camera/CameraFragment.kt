@@ -99,10 +99,9 @@ class CameraFragment : Fragment() {
 
             override fun onError(exception: ImageCaptureException) {
                 super.onError(exception)
-                Log.d(TAG, "Photo capture failed: ${exception.message}", exception)
+                Log.w(TAG, "Photo capture failed: ${exception.message}", exception)
             }
         })
-        findNavController().popBackStack()
     }
 
     private fun imageProxyToBitmap(image: ImageProxy): Bitmap {
@@ -132,7 +131,7 @@ class CameraFragment : Fragment() {
                 )
 
             } catch (exc: Exception) {
-                Log.d(TAG, "Use case binding failed", exc)
+                Log.w(TAG, "Use case binding failed", exc)
             }
 
         }, ContextCompat.getMainExecutor(requireContext()))

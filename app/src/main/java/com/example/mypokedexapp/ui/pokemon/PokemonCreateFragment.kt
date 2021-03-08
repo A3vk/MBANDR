@@ -4,6 +4,7 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -42,9 +43,7 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_pokemon_create, container, false)
         pokemonImage = root.findViewById(R.id.create_pokemon_image)
-        println("CHECK BITMAP")
         if(MainActivity.bitmap != null) {
-            println("SET BITMAP")
             pokemonImage.setImageBitmap(MainActivity.bitmap)
             pokemonFileName = ImageHelper.bitmapToBase64(MainActivity.bitmap!!)
             MainActivity.bitmap = null
@@ -93,7 +92,6 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
             val chooserIntent = Intent.createChooser(getIntent, "Select Image")
             chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(pickIntent))
 
-            // TODO: DEPRECATED
             startActivityForResult(chooserIntent, PICK_IMAGE)
         }
         val imageFromCamera: Button = root.findViewById(R.id.image_from_camera_button)
@@ -120,10 +118,20 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 secondaryType = Type.getType(pokemonSecondaryType!!)
             }
 
+            validateNumber(arrayOf(hp, attack, defence, specialAttack, specialDefence, speed))
+
             return Pokemon(id, name, image, hp, attack, defence, specialAttack, specialDefence, speed, primaryType!!, secondaryType, false)
         } catch (e: Exception){
             Log.w("PokemonCreateFragment", "Failed to create pokemon: ${e.message}", e)
             return null
+        }
+    }
+
+    private fun validateNumber(array: Array<Int>) {
+        array.forEach {
+            if (it < 0 || it > 255) {
+                throw Exception()
+            }
         }
     }
 
@@ -142,7 +150,6 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        // TODO: DEPRECATED
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             when(requestCode){
@@ -157,10 +164,12 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
 
         val uri = data.data
-        val bitmap = getBitmap(uri!!)
-        val base64 = ImageHelper.bitmapToBase64(bitmap!!)
-        pokemonFileName = base64
-        pokemonImage.setImageURI(uri)
+        var bitmap = getBitmap(uri!!)!!
+        val matrix = Matrix()
+        matrix.postRotate(90F)
+        bitmap = Bitmap.createBitmap(bitmap, bitmap.width / 2 - 250, bitmap.height / 2 - 250, 500, 500, matrix, false)
+        pokemonImage.setImageBitmap(bitmap)
+        pokemonFileName = ImageHelper.bitmapToBase64(bitmap)
     }
 
     private fun getBitmap(uri: Uri): Bitmap? {
