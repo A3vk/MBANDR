@@ -8,7 +8,6 @@
     <string name="pokemon_detail_toast_positive">Pokemon added to team!</string>
     <string name="pokemon_detail_toast_negative">Your team already has %1$d pokemon!</string>
     <string name="pokemon_detail_menu_add">Add</string>
-    <string name="profile_menu_next"></string>
     <string name="team_menu_share">Share</string>
     <string name="team_no_pokemon">There are currently no pokemon in your team!</string>
     <string name="placeholder">{{PLACEHOLDER}}</string>
