@@ -58,6 +58,7 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
             val pokemon = createPokemon(root)
             if(pokemon != null) {
                 pokemonCreateViewModel.saveCustomPokemon(pokemon)
+                findNavController().popBackStack()
             } else {
                 Toast.makeText(
                     requireContext(),
