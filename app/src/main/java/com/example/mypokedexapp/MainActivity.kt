@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
 
         val colors = intArrayOf(
             Color.parseColor(color),
-            R.color.design_default_color_primary
+            ColorHelper.darken(Color.parseColor(color), 0.3F)
         )
 
         val colorStateList = ColorStateList(states, colors)

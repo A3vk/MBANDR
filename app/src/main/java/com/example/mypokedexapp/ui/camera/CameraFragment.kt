@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -81,11 +82,15 @@ class CameraFragment : Fragment() {
         imageCapture.takePicture(cameraExecutor, object : ImageCapture.OnImageCapturedCallback() {
             override fun onCaptureSuccess(image: ImageProxy) {
                 var bitmap = imageProxyToBitmap(image)
-                println(bitmap.width.toString() + " - " + bitmap.height.toString())
-                bitmap = Bitmap.createBitmap(bitmap, bitmap.width / 2 - 250, bitmap.height / 2 - 250, 500, 500)
-                println(bitmap.width.toString() + " - " + bitmap.height.toString())
+                val matrix = Matrix()
+                matrix.postRotate(90F)
+                bitmap = Bitmap.createBitmap(bitmap, bitmap.width / 2 - 250, bitmap.height / 2 - 250, 500, 500, matrix, false)
                 MainActivity.bitmap = bitmap
                 super.onCaptureSuccess(image)
+
+                CoroutineScope(Dispatchers.Main + Job()).launch {
+                    findNavController().popBackStack()
+                }
             }
 
             override fun onError(exception: ImageCaptureException) {
