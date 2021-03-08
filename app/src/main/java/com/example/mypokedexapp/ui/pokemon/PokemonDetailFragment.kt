@@ -16,6 +16,7 @@ import androidx.fragment.app.viewModels
 import com.android.volley.toolbox.NetworkImageView
 import com.example.mypokedexapp.PokemonApplication
 import com.example.mypokedexapp.R
+import com.example.mypokedexapp.utils.ImageHelper
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -69,9 +70,7 @@ class PokemonDetailFragment : Fragment() {
             if(pokemon.imageUrl.startsWith("http", true)){
                 imageView.setImageUrl(pokemon.imageUrl, (activity?.application as PokemonApplication).imageLoader)
             } else{
-                val base64 = pokemon.imageUrl
-                val decodedString = Base64.decode(pokemon.imageUrl.substring(base64.indexOf(",") + 1), Base64.DEFAULT);
-                val bitMap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                val bitMap = ImageHelper.base64ToBitmap(pokemon.imageUrl)
                 customImageView.setImageBitmap(bitMap)
             }
 

@@ -1,26 +1,26 @@
 package com.example.mypokedexapp.ui.pokemon
 
 import android.app.Activity.RESULT_OK
-import android.content.ContentResolver
 import android.content.Intent
-import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.mypokedexapp.MainActivity
 import com.example.mypokedexapp.PokemonApplication
 import com.example.mypokedexapp.R
 import com.example.mypokedexapp.models.Pokemon
 import com.example.mypokedexapp.models.Type
+import com.example.mypokedexapp.utils.ImageHelper
 import java.io.*
 
 
@@ -42,6 +42,11 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_pokemon_create, container, false)
         pokemonImage = root.findViewById(R.id.create_pokemon_image)
+        if(MainActivity.bitmap != null) {
+            pokemonImage.setImageBitmap(MainActivity.bitmap)
+            pokemonFileName = ImageHelper.bitmapToBase64(MainActivity.bitmap!!)
+            MainActivity.bitmap = null
+        }
 
         val saveButton: Button = root.findViewById(R.id.create_pokemon_save_button)
         pokemonCreateViewModel.nextCustomPokemonId.observe(viewLifecycleOwner){
@@ -76,6 +81,7 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
             val chooserIntent = Intent.createChooser(getIntent, "Select Image")
             chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(pickIntent))
 
+            // TODO: DEPRECATED
             startActivityForResult(chooserIntent, PICK_IMAGE)
         }
         val imageFromCamera: Button = root.findViewById(R.id.image_from_camera_button)
@@ -121,6 +127,7 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        // TODO: DEPRECATED
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             when(requestCode){
@@ -136,8 +143,8 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         val uri = data.data
         val bitmap = getBitmap(uri!!)
-        val base64 = bitmapToBase64(bitmap!!)
-        pokemonFileName = base64!!
+        val base64 = ImageHelper.bitmapToBase64(bitmap!!)
+        pokemonFileName = base64
         pokemonImage.setImageURI(uri)
     }
 
@@ -156,12 +163,5 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }catch (e: FileNotFoundException){}
 
         return bitmap
-    }
-
-    private fun bitmapToBase64(bitmap: Bitmap): String? {
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
-        val byteArray = byteArrayOutputStream.toByteArray()
-        return Base64.encodeToString(byteArray, Base64.DEFAULT)
     }
 }

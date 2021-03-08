@@ -1,7 +1,5 @@
 package com.example.mypokedexapp.ui.team
 
-import android.graphics.BitmapFactory
-import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +12,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.NetworkImageView
-import com.example.mypokedexapp.PokemonApplication
 import com.example.mypokedexapp.R
 import com.example.mypokedexapp.models.Pokemon
 import com.example.mypokedexapp.ui.team.TeamAdapter.TeamViewHolder
+import com.example.mypokedexapp.utils.ImageHelper
 import java.util.*
 
 class TeamAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon, TeamViewHolder>(
@@ -50,9 +48,7 @@ class TeamAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon, T
             if(pokemon.imageUrl.startsWith("http", true)){
                 pokemonImage.setImageUrl(pokemon.imageUrl, imageLoader)
             } else{
-                val base64 = pokemon.imageUrl
-                val decodedString = Base64.decode(pokemon.imageUrl.substring(base64.indexOf(",") + 1), Base64.DEFAULT);
-                val bitMap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                val bitMap = ImageHelper.base64ToBitmap(pokemon.imageUrl)
                 pokemonCustomImage.setImageBitmap(bitMap)
             }
 

@@ -1,8 +1,5 @@
 package com.example.mypokedexapp.ui.profile
 
-import android.graphics.BitmapFactory
-import android.net.Uri
-import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,10 +15,9 @@ import com.android.volley.toolbox.NetworkImageView
 import com.example.mypokedexapp.R
 import com.example.mypokedexapp.models.Pokemon
 import com.example.mypokedexapp.ui.profile.ProfileAdapter.ProfileViewHolder
+import com.example.mypokedexapp.utils.ImageHelper
 
-class ProfileAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon, ProfileViewHolder>(
-    PokemonCompacter()
-) {
+class ProfileAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon, ProfileViewHolder>(PokemonCompacter()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
         return ProfileViewHolder.create(parent)
     }
@@ -47,9 +43,7 @@ class ProfileAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon
             pokemonNumber = pokemon.number
             pokemonName.text = "# ${pokemon.number} ${pokemon.name}"
 
-            val base64 = pokemon.imageUrl
-            val decodedString = Base64.decode(base64.substring(base64.indexOf(",") + 1), Base64.DEFAULT);
-            val bitMap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            val bitMap = ImageHelper.base64ToBitmap(pokemon.imageUrl)
             pokemonImage.setImageBitmap(bitMap)
             pokemonCustomImage.setImageBitmap(bitMap)
         }
