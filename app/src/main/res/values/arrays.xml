@@ -1,13 +1,33 @@
 <resources>
-    <!-- Reply Preference -->
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
+    <string-array name="language_preference_names">
+        <item>English</item>
+        <item>Dutch</item>
     </string-array>
 
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
+    <string-array name="language_preference_values">
+        <item>en</item>
+        <item>nl</item>
+    </string-array>
+
+    <string-array name="color_preference_names">
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+    </string-array>
+
+    <string-array name="color_preference_values">
+        <item>#FF5733</item>
+        <item>#39FF33</item>
+        <item>#334FFF</item>
+    </string-array>
+
+    <string-array name="share_numbers">
+        <item>one</item>
+        <item>two</item>
+        <item>three</item>
+        <item>four</item>
+        <item>five</item>
+        <item>six</item>
     </string-array>
 
     <!-- Create Pokemon -->

@@ -23,7 +23,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 
 
-class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener{
+class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
     companion object {
         var bitmap: Bitmap? = null
     }

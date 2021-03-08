@@ -1,10 +1,8 @@
 package com.example.mypokedexapp.values
 
-class PreferenceKeys {
-    companion object {
-        val COLOR = "color_preference"
-        val DEFAULT_COLOR = "#FF6200EE"
-        val LANGUAGE = "language_preference"
-        val DEFAULT_LANGUAGE = "en"
-    }
+object PreferenceKeys {
+    const val COLOR = "color_preference"
+    const val DEFAULT_COLOR = "#FF6200EE"
+    const val LANGUAGE = "language_preference"
+    const val DEFAULT_LANGUAGE = "en"
 }

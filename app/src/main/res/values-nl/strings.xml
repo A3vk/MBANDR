@@ -6,6 +6,11 @@
     <string name="title_profile">Profiel</string>
     <string name="title_settings">Instellingen</string>
     <string name="title_pokemon_details">Pokemon Details</string>
+    <string name="pokemon_detail_toast_positive">De pokemon is toegevoegd aan het team!</string>
+    <string name="pokemon_detail_toast_negative">Je team heeft al %1$d pokemon!</string>
+    <string name="pokemon_detail_menu_add">Toevoegen</string>
+    <string name="team_menu_share">Delen</string>
+    <string name="team_no_pokemon">Er bevinden zich op dit moment geen pokemon in je team!</string>
     <string name="placeholder">{{PLACEHOLDER}}</string>
 
     <!--Pokemon Stat Names -->
@@ -45,17 +50,17 @@
     <string name="create_pokemon_image_from_camera_button">Get Image From Camera</string>
 
     <!--Language Preference -->
-    <string-array name="language_preference_names">
-        <item>Engels</item>
-        <!--item>EN</item-->
-        <item>Nederlands</item>
-        <!--item>NL</item-->
-    </string-array>
+    <string name="language_preference">Taal</string>
+    <string name="language_preference_summary">Kies de taal van de app</string>
 
-    <string-array name="language_preference_values">
-        <!--item>English</item-->
-        <item>en</item>
-        <!--item>Dutch</item-->
-        <item>nl</item>
-    </string-array>
+    <!-- Color Preference -->
+    <string name="color_preference">Kleur</string>
+    <string name="color_preference_summary">Kies de hoofdkleur van de app</string>
+
+    <string name="share_intro">Kijk dit is mijn pokemon team uit de \"%1$s\". Mijn team heeft %2$s pokemon:\n</string>
+    <string name="share_ending">\nDownload de app ook om je eigen team te maken!</string>
+    <string name="share_empty">Ik heb geen pokemon in mijn team :(</string>
+
+    <string name="colorpicker_button_select">Selecteer</string>
+    <string name="colorpicker_error">Hex Code is incorrect</string>
 </resources>
