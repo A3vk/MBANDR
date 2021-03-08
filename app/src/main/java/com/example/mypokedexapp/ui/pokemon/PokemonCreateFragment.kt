@@ -42,7 +42,9 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_pokemon_create, container, false)
         pokemonImage = root.findViewById(R.id.create_pokemon_image)
+        println("CHECK BITMAP")
         if(MainActivity.bitmap != null) {
+            println("SET BITMAP")
             pokemonImage.setImageBitmap(MainActivity.bitmap)
             pokemonFileName = ImageHelper.bitmapToBase64(MainActivity.bitmap!!)
             MainActivity.bitmap = null

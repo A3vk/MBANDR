@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -14,15 +15,12 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
+import androidx.navigation.fragment.findNavController
 import com.example.mypokedexapp.MainActivity
 import com.example.mypokedexapp.R
-import com.example.mypokedexapp.ui.pokemon.PokemonCreateFragment
-import com.example.mypokedexapp.utils.ImageHelper
+import kotlinx.coroutines.*
 import java.nio.ByteBuffer
-import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -85,11 +83,15 @@ class CameraFragment : Fragment() {
         imageCapture.takePicture(cameraExecutor, object : ImageCapture.OnImageCapturedCallback() {
             override fun onCaptureSuccess(image: ImageProxy) {
                 var bitmap = imageProxyToBitmap(image)
-                println(bitmap.width.toString() + " - " + bitmap.height.toString())
-                bitmap = Bitmap.createBitmap(bitmap, bitmap.width / 2 - 250, bitmap.height / 2 - 250, 500, 500)
-                println(bitmap.width.toString() + " - " + bitmap.height.toString())
+                val matrix = Matrix()
+                matrix.postRotate(90F)
+                bitmap = Bitmap.createBitmap(bitmap, bitmap.width / 2 - 250, bitmap.height / 2 - 250, 500, 500, matrix, false)
                 MainActivity.bitmap = bitmap
                 super.onCaptureSuccess(image)
+
+                CoroutineScope(Dispatchers.Main + Job()).launch {
+                    findNavController().popBackStack()
+                }
             }
 
             override fun onError(exception: ImageCaptureException) {

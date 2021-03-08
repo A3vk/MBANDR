@@ -58,8 +58,9 @@ class ColorPicker(private val activity: Activity): Dialog(activity), SeekBar.OnS
                 val inputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(hexCode.windowToken, 0)
                 true
+            } else {
+                false
             }
-            false
         }
 
         val sendButton: Button = findViewById(R.id.sendColorButton)
