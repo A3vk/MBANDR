@@ -9,24 +9,59 @@
         android:id="@+id/navigation_pokedex"
         android:name="com.example.mypokedexapp.ui.pokedex.PokedexFragment"
         android:label="@string/title_pokedex"
-        tools:layout="@layout/fragment_pokedex" />
+        tools:layout="@layout/fragment_pokedex" >
+        <action
+            android:id="@+id/action_navigation_pokedex_to_navigation_pokemon_detail"
+            app:destination="@id/navigation_pokemon_detail" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_team"
         android:name="com.example.mypokedexapp.ui.team.TeamFragment"
         android:label="@string/title_team"
-        tools:layout="@layout/fragment_team" />
+        tools:layout="@layout/fragment_team" >
+        <action
+            android:id="@+id/action_navigation_team_to_navigation_pokemon_detail"
+            app:destination="@id/navigation_pokemon_detail" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.mypokedexapp.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_pokemon_detail"
+            app:destination="@id/navigation_pokemon_detail" />
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_pokemon_create"
+            app:destination="@id/navigation_pokemon_create" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.example.mypokedexapp.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@xml/fragment_settings" />
 
+    <fragment
+        android:id="@+id/navigation_pokemon_detail"
+        android:name="com.example.mypokedexapp.ui.pokemon.PokemonDetailFragment"
+        android:label="@string/title_pokemon_details"
+        tools:layout="@layout/fragment_pokemon_detail" />
+
+    <fragment
+        android:id="@+id/navigation_pokemon_create"
+        android:name="com.example.mypokedexapp.ui.pokemon.PokemonCreateFragment"
+        android:label="@string/fragment_pokemon_create"
+        tools:layout="@layout/fragment_pokemon_create" >
+        <action
+            android:id="@+id/action_navigation_pokemon_create_to_fragment_camera"
+            app:destination="@id/fragment_camera" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_camera"
+        android:name="com.example.mypokedexapp.ui.camera.CameraFragment"
+        android:label="@string/fragment_camera"
+        tools:layout="@layout/fragment_camera" />
 </navigation>

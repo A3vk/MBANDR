@@ -4,4 +4,68 @@
     <string name="title_team">Team</string>
     <string name="title_profile">Profile</string>
     <string name="title_settings">Settings</string>
+    <string name="title_pokemon_details">Pokemon Details</string>
+    <string name="pokemon_detail_toast_positive">Pokemon added to team!</string>
+    <string name="pokemon_detail_toast_negative">Your team already has %1$d pokemon!</string>
+    <string name="pokemon_detail_menu_add">Add</string>
+    <string name="team_menu_share">Share</string>
+    <string name="team_no_pokemon">There are currently no pokemon in your team!</string>
+    <string name="placeholder">{{PLACEHOLDER}}</string>
+
+    <!--Pokemon Stat Names -->
+    <string name="hp">hp</string>
+    <string name="attack">attack</string>
+    <string name="defence">defense</string>
+    <string name="special_attack">special-attack</string>
+    <string name="special_defence">special-\ndefense</string>
+    <string name="speed">speed</string>
+
+    <!--Pokemon Type Names -->
+    <string name="water">water</string>
+    <string name="fire">fire</string>
+    <string name="grass">grass</string>
+    <string name="ground">ground</string>
+    <string name="rock">rock</string>
+    <string name="steel">steel</string>
+    <string name="ice">ice</string>
+    <string name="electric">electric</string>
+    <string name="dragon">dragon</string>
+    <string name="ghost">ghost</string>
+    <string name="psychic">psychic</string>
+    <string name="normal">normal</string>
+    <string name="fighting">fighting</string>
+    <string name="poison">poison</string>
+    <string name="bug">bug</string>
+    <string name="flying">flying</string>
+    <string name="dark">dark</string>
+    <string name="fairy">fairy</string>
+
+    <!--Create Pokemon -->
+    <string name="create_pokemon_name">Name</string>
+    <string name="create_pokemon_primary_type">Primary Type</string>
+    <string name="create_pokemon_secondary_type">Secondary Type</string>
+    <string name="create_pokemon_save_button">Save Pokemon</string>
+    <string name="create_pokemon_image_from_directory_button">Get Image From Gallery </string>
+    <string name="create_pokemon_image_from_camera_button">Get Image From Camera</string>
+    <string name="create_pokemon_error_toast">Pokemon data is invalid</string>
+    <string name="fragment_pokemon_create">Create Pokemon</string>
+    <string name="fragment_camera">Camera</string>
+
+
+    <!--Language Preference -->
+    <string name="language_preference">Language</string>
+    <string name="language_preference_summary">Choose the color language of the application</string>
+
+    <!-- Color Preference -->
+    <string name="color_preference">Color</string>
+    <string name="color_preference_summary">Choose the primary color for the app</string>
+
+    <!-- Share text -->
+    <string name="share_intro">Look at my pokemon team from the \"%1$s\". It has %2$s pokemon:\n</string>
+    <string name="share_ending">\nDownload the app now if you want to create your own team!</string>
+    <string name="share_empty">There are no pokemon in my team :(</string>
+
+    <string name="colorpicker_button_select">Select</string>
+    <string name="colorpicker_hash" translatable="false">#</string>
+    <string name="colorpicker_error">Hex Code Format incorrect</string>
 </resources>

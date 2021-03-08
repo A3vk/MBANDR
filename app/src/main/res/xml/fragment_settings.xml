@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="first_preference_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ListPreference
+        android:key="language_preference"
+        android:title="@string/language_preference"
+        android:entries="@array/language_preference_names"
+        android:entryValues="@array/language_preference_values"
+        android:summary="@string/language_preference_summary"/>
+
+    <ListPreference
+        android:key="color_preference"
+        android:title="@string/color_preference"
+        android:entries="@array/color_preference_names"
+        android:entryValues="@array/color_preference_values"
+        android:summary="@string/color_preference_summary"/>
+</PreferenceScreen>

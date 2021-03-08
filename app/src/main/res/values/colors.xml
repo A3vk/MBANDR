@@ -7,4 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="team_delete_color">#F44336</color>
+
+<!--    <color name="colorpicker_white">#ffffff</color>-->
+    <color name="colorpicker_red">#f44336</color>
+    <color name="colorpicker_green">#4caf50</color>
+    <color name="colorpicker_blue">#2196f3</color>
+    <color name="colorpicker_grey">#b3b3b3</color>
+<!--    <color name="colorpicker_lightgrey">#d9d9d9</color>-->
+<!--    <color name="colorpicker_dribble">#ea4c89</color>-->
+<!--    <color name="colorpicker_dribbledark">#c32361</color>-->
+<!--    <color name="colorpicker_black">#000000</color>-->
+<!--    <color name="colorpicker_dialogcolor">#009688</color>-->
 </resources>

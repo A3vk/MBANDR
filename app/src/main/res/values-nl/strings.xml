@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mijn Pokedex App</string>
+    <string name="title_pokedex">Pokedex</string>
+    <string name="title_team">Team</string>
+    <string name="title_profile">Profiel</string>
+    <string name="title_settings">Instellingen</string>
+    <string name="title_pokemon_details">Pokemon Details</string>
+    <string name="pokemon_detail_toast_positive">De pokemon is toegevoegd aan het team!</string>
+    <string name="pokemon_detail_toast_negative">Je team heeft al %1$d pokemon!</string>
+    <string name="pokemon_detail_menu_add">Toevoegen</string>
+    <string name="team_menu_share">Delen</string>
+    <string name="team_no_pokemon">Er bevinden zich op dit moment geen pokemon in je team!</string>
+    <string name="placeholder">{{PLACEHOLDER}}</string>
+
+    <!--Pokemon Stat Names -->
+    <string name="hp">hp</string>
+    <string name="attack">aanval</string>
+    <string name="defence">verdediging</string>
+    <string name="special_attack">speciale-aanval</string>
+    <string name="special_defence">speciale-\nverdediging</string>
+    <string name="speed">snelheid</string>
+
+    <!--Pokemon Type Names -->
+    <string name="water">water</string>
+    <string name="fire">vuur</string>
+    <string name="grass">gras</string>
+    <string name="ground">grond</string>
+    <string name="rock">steen</string>
+    <string name="steel">staal</string>
+    <string name="ice">ijs</string>
+    <string name="electric">elektrisch</string>
+    <string name="dragon">draak</string>
+    <string name="ghost">geest</string>
+    <string name="psychic">psychisch</string>
+    <string name="normal">normaal</string>
+    <string name="fighting">vecht</string>
+    <string name="poison">gif</string>
+    <string name="bug">insect</string>
+    <string name="flying">vliegend</string>
+    <string name="dark">duister</string>
+    <string name="fairy">fee</string>
+
+    <!--Create Pokemon -->
+    <string name="create_pokemon_name">Naam</string>
+    <string name="create_pokemon_primary_type">Primair Type</string>
+    <string name="create_pokemon_secondary_type">Secundair Type</string>
+    <string name="create_pokemon_save_button">Pokemon Opslaan</string>
+    <string name="create_pokemon_image_from_directory_button">Ga Naar Gallerij</string>
+    <string name="create_pokemon_image_from_camera_button">Ga Naar Camera</string>
+    <string name="create_pokemon_error_toast">Pokemon gegevens zijn niet valide</string>
+    <string name="fragment_pokemon_create">Maak een Pokemon</string>
+    <string name="fragment_camera">Camera</string>
+
+    <!--Language Preference -->
+    <string name="language_preference">Taal</string>
+    <string name="language_preference_summary">Kies de taal van de app</string>
+
+    <!-- Color Preference -->
+    <string name="color_preference">Kleur</string>
+    <string name="color_preference_summary">Kies de hoofdkleur van de app</string>
+
+    <string name="share_intro">Kijk dit is mijn pokemon team uit de \"%1$s\". Mijn team heeft %2$s pokemon:\n</string>
+    <string name="share_ending">\nDownload de app ook om je eigen team te maken!</string>
+    <string name="share_empty">Ik heb geen pokemon in mijn team :(</string>
+
+    <string name="colorpicker_button_select">Selecteer</string>
+    <string name="colorpicker_error">Hex Code is incorrect</string>
+</resources>

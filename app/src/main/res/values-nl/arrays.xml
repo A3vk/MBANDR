@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="language_preference_names">
+        <item>Engels</item>
+        <item>Nederlands</item>
+    </string-array>
+
+    <string-array name="language_preference_values">
+        <item>en</item>
+        <item>nl</item>
+    </string-array>
+
+    <string-array name="color_preference_names">
+        <item>Rood</item>
+        <item>Groen</item>
+        <item>Blauw</item>
+    </string-array>
+
+    <string-array name="color_preference_values">
+        <item>#FF5733</item>
+        <item>#39FF33</item>
+        <item>#334FFF</item>
+    </string-array>
+
+    <string-array name="share_numbers">
+        <item>een</item>
+        <item>twee</item>
+        <item>drie</item>
+        <item>vier</item>
+        <item>vijf</item>
+        <item>zes</item>
+    </string-array>
+</resources>

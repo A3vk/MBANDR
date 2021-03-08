@@ -1,0 +1,54 @@
+<resources>
+    <string-array name="language_preference_names">
+        <item>English</item>
+        <item>Dutch</item>
+    </string-array>
+
+    <string-array name="language_preference_values">
+        <item>en</item>
+        <item>nl</item>
+    </string-array>
+
+    <string-array name="color_preference_names">
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+    </string-array>
+
+    <string-array name="color_preference_values">
+        <item>#FF5733</item>
+        <item>#39FF33</item>
+        <item>#334FFF</item>
+    </string-array>
+
+    <string-array name="share_numbers">
+        <item>one</item>
+        <item>two</item>
+        <item>three</item>
+        <item>four</item>
+        <item>five</item>
+        <item>six</item>
+    </string-array>
+
+    <!-- Create Pokemon -->
+    <string-array name="pokemon_type_array">
+        <item name="water">water</item>
+        <item name="fire">fire</item>
+        <item name="grass">grass</item>
+        <item name="ground">ground</item>
+        <item name="rock">rock</item>
+        <item name="steel">steel</item>
+        <item name="ice">ice</item>
+        <item name="electric">electric</item>
+        <item name="dragon">dragon</item>
+        <item name="ghost">ghost</item>
+        <item name="psychic">psychic</item>
+        <item name="normal">normal</item>
+        <item name="fighting">fighting</item>
+        <item name="poison">poison</item>
+        <item name="bug">bug</item>
+        <item name="flying">flying</item>
+        <item name="dark">dark</item>
+        <item name="fairy">fairy</item>
+    </string-array>
+</resources>

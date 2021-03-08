@@ -1,13 +1,46 @@
 package com.example.mypokedexapp.ui.pokedex
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.example.mypokedexapp.models.Pokemon
+import com.example.mypokedexapp.repositories.PokemonRepository
 
-class PokedexViewModel : ViewModel() {
+class PokedexViewModel(private val pokemonRepository: PokemonRepository): ViewModel() {
+    private val offset = 20
+    private var totalPokemon = 0
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is pokedex Fragment"
+    val pokemon: LiveData<ArrayList<Pokemon>>
+        get() = _pokemon
+
+    private val _pokemon = MutableLiveData<ArrayList<Pokemon>>().apply{
+        value = ArrayList()
+        pokemonRepository.getPokemonList(totalPokemon) { pokemon ->
+            value?.add(pokemon)
+            value?.sort()
+            value = value
+        }
+        totalPokemon += offset
     }
-    val text: LiveData<String> = _text
+
+    fun getNextPokemon() {
+        if (totalPokemon == _pokemon.value?.count()) {
+            _pokemon.apply {
+                pokemonRepository.getPokemonList(totalPokemon) { pokemon ->
+                    value?.add(pokemon)
+                    value?.sort()
+                    value = value
+                }
+            }
+            totalPokemon += offset
+        }
+    }
+}
+
+class PokedexViewModelFactory(private val repository: PokemonRepository) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(PokedexViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return PokedexViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
 }
