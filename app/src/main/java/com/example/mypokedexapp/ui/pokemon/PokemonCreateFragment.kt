@@ -7,12 +7,12 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.mypokedexapp.MainActivity
@@ -53,7 +53,16 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
             nextCustomPokemonId = it ?: -1
         }
         saveButton.setOnClickListener{
-            pokemonCreateViewModel.saveCustomPokemon(createPokemon(root))
+            val pokemon = createPokemon(root)
+            if(pokemon != null) {
+                pokemonCreateViewModel.saveCustomPokemon(pokemon)
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    resources.getString(R.string.create_pokemon_error_toast),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         val primaryTypeSpinner: Spinner = root.findViewById(R.id.pokemon_primary_type_input)
@@ -91,25 +100,28 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return root
     }
 
-    private fun createPokemon(root: View) : Pokemon {
-        //TODO implement image via camera
-        val image = pokemonFileName
-        val id = nextCustomPokemonId
-        val name = root.findViewById<EditText>(R.id.pokemon_name_input).text.toString()
-        val hp = root.findViewById<EditText>(R.id.pokemon_hp_input).text.toString().toInt()
-        val attack = root.findViewById<EditText>(R.id.pokemon_attack_input).text.toString().toInt()
-        val defence = root.findViewById<EditText>(R.id.pokemon_defence_input).text.toString().toInt()
-        val specialAttack = root.findViewById<EditText>(R.id.pokemon_special_attack_input).text.toString().toInt()
-        val specialDefence = root.findViewById<EditText>(R.id.pokemon_special_defence_input).text.toString().toInt()
-        val speed = root.findViewById<EditText>(R.id.pokemon_speed_input).text.toString().toInt()
-        val primaryType = Type.getType(pokemonPrimaryType)
-        var secondaryType: Type? = null
-        if(pokemonSecondaryType != null){
-            secondaryType = Type.getType(pokemonSecondaryType!!)
+    private fun createPokemon(root: View) : Pokemon? {
+        try{
+            val image = pokemonFileName
+            val id = nextCustomPokemonId
+            val name = root.findViewById<EditText>(R.id.pokemon_name_input).text.toString()
+            val hp = root.findViewById<EditText>(R.id.pokemon_hp_input).text.toString().toInt()
+            val attack = root.findViewById<EditText>(R.id.pokemon_attack_input).text.toString().toInt()
+            val defence = root.findViewById<EditText>(R.id.pokemon_defence_input).text.toString().toInt()
+            val specialAttack = root.findViewById<EditText>(R.id.pokemon_special_attack_input).text.toString().toInt()
+            val specialDefence = root.findViewById<EditText>(R.id.pokemon_special_defence_input).text.toString().toInt()
+            val speed = root.findViewById<EditText>(R.id.pokemon_speed_input).text.toString().toInt()
+            val primaryType = Type.getType(pokemonPrimaryType)
+            var secondaryType: Type? = null
+            if(pokemonSecondaryType != null){
+                secondaryType = Type.getType(pokemonSecondaryType!!)
+            }
+
+            return Pokemon(id, name, image, hp, attack, defence, specialAttack, specialDefence, speed, primaryType!!, secondaryType, false)
+        } catch (e: Exception){
+            Log.w("PokemonCreateFragment", "Failed to create pokemon: ${e.message}", e)
+            return null
         }
-
-
-        return Pokemon(id, name, image, hp, attack, defence, specialAttack, specialDefence, speed, primaryType!!, secondaryType, false)
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

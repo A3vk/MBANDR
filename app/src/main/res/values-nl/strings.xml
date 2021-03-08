@@ -48,6 +48,9 @@
     <string name="create_pokemon_save_button">Pokemon Opslaan</string>
     <string name="create_pokemon_image_from_directory_button">Get Image From Gallery </string>
     <string name="create_pokemon_image_from_camera_button">Get Image From Camera</string>
+    <string name="create_pokemon_error_toast">Pokemon gegevens zijn niet valide</string>
+    <string name="fragment_pokemon_create">Maak een Pokemon</string>
+    <string name="fragment_camera">Camera</string>
 
     <!--Language Preference -->
     <string name="language_preference">Taal</string>

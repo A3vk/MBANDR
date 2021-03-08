@@ -53,7 +53,7 @@
     <fragment
         android:id="@+id/navigation_pokemon_create"
         android:name="com.example.mypokedexapp.ui.pokemon.PokemonCreateFragment"
-        android:label="fragment_pokemon_create"
+        android:label="@string/fragment_pokemon_create"
         tools:layout="@layout/fragment_pokemon_create" >
         <action
             android:id="@+id/action_navigation_pokemon_create_to_fragment_camera"
@@ -62,7 +62,6 @@
     <fragment
         android:id="@+id/fragment_camera"
         android:name="com.example.mypokedexapp.ui.camera.CameraFragment"
-        android:label="fragment_camera"
+        android:label="@string/fragment_camera"
         tools:layout="@layout/fragment_camera" />
-
 </navigation>

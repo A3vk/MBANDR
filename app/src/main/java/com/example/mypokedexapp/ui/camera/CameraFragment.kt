@@ -14,15 +14,11 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
+import androidx.navigation.fragment.findNavController
 import com.example.mypokedexapp.MainActivity
 import com.example.mypokedexapp.R
-import com.example.mypokedexapp.ui.pokemon.PokemonCreateFragment
-import com.example.mypokedexapp.utils.ImageHelper
 import java.nio.ByteBuffer
-import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -94,9 +90,10 @@ class CameraFragment : Fragment() {
 
             override fun onError(exception: ImageCaptureException) {
                 super.onError(exception)
-                Log.e(TAG, "Photo capture failed: ${exception.message}", exception)
+                Log.d(TAG, "Photo capture failed: ${exception.message}", exception)
             }
         })
+        findNavController().popBackStack()
     }
 
     private fun imageProxyToBitmap(image: ImageProxy): Bitmap {
@@ -126,7 +123,7 @@ class CameraFragment : Fragment() {
                 )
 
             } catch (exc: Exception) {
-                Log.e(TAG, "Use case binding failed", exc)
+                Log.d(TAG, "Use case binding failed", exc)
             }
 
         }, ContextCompat.getMainExecutor(requireContext()))
