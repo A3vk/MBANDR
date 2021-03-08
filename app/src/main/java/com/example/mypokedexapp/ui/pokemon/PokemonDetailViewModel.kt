@@ -20,17 +20,9 @@ class PokemonDetailViewModel(private val pokemonRepository: PokemonRepository) :
                 value = pokemon
             }
         }
-
-
     }
 
-    var numberOfPokemonInTeam = 0
-    init {
-        // FIXME: Observe forever will always exist, even if the fragment is no longer visible. Find another way to do this.
-        pokemonRepository.pokemonInTeam.asLiveData().observeForever {
-            numberOfPokemonInTeam = it
-        }
-    }
+    var numberOfPokemonInTeam = pokemonRepository.pokemonInTeam.asLiveData()
 
     fun addPokemonToTeam() = viewModelScope.launch {
         _pokemon.value?.let {

@@ -5,6 +5,8 @@
     <string name="title_profile">Profile</string>
     <string name="title_settings">Settings</string>
     <string name="title_pokemon_details">Pokemon Details</string>
+    <string name="pokemon_detail_toast_positive">Pokemon added to team!</string>
+    <string name="pokemon_detail_toast_negative">Your team already has %1$d pokemon!</string>
     <string name="pokemon_detail_menu_add">Add</string>
     <string name="team_menu_share">Share</string>
     <string name="team_no_pokemon">There are currently no pokemon in your team!</string>
@@ -39,26 +41,19 @@
     <string name="fairy">fairy</string>
 
     <!--Language Preference -->
-    <string-array name="language_preference_names">
-        <item>English</item>
-        <!--item>EN</item-->
-        <item>Dutch</item>
-        <!--item>NL</item-->
-    </string-array>
+    <string name="language_preference">Language</string>
+    <string name="language_preference_summary">Choose the color language of the application</string>
 
-    <string-array name="language_preference_values">
-        <!--item>English</item-->
-        <item>en</item>
-        <!--item>Dutch</item-->
-        <item>nl</item>
-    </string-array>
+    <!-- Color Preference -->
+    <string name="color_preference">Color</string>
+    <string name="color_preference_summary">Choose the primary color for the app</string>
 
-    <string-array name="numbers">
-        <item>one</item>
-        <item>two</item>
-        <item>three</item>
-        <item>four</item>
-        <item>five</item>
-        <item>six</item>
-    </string-array>
+    <!-- Share text -->
+    <string name="share_intro">Look at my pokemon team from the \"%1$s\". It has %2$s pokemon:\n</string>
+    <string name="share_ending">\nDownload the app now if you want to create your own team!</string>
+    <string name="share_empty">There are no pokemon in my team :(</string>
+
+    <string name="colorpicker_button_select">Select</string>
+    <string name="colorpicker_hash" translatable="false">#</string>
+    <string name="colorpicker_error">Hex Code Format incorrect</string>
 </resources>
