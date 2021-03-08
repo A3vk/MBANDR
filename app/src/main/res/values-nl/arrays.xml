@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="language_preference_names">
-        <item>English</item>
-        <item>Dutch</item>
+        <item>Engels</item>
+        <item>Nederlands</item>
     </string-array>
 
     <string-array name="language_preference_values">
@@ -10,9 +11,9 @@
     </string-array>
 
     <string-array name="color_preference_names">
-        <item>Red</item>
-        <item>Green</item>
-        <item>Blue</item>
+        <item>Rood</item>
+        <item>Groen</item>
+        <item>Blauw</item>
     </string-array>
 
     <string-array name="color_preference_values">
@@ -22,11 +23,11 @@
     </string-array>
 
     <string-array name="share_numbers">
-        <item>one</item>
-        <item>two</item>
-        <item>three</item>
-        <item>four</item>
-        <item>five</item>
-        <item>six</item>
+        <item>een</item>
+        <item>twee</item>
+        <item>drie</item>
+        <item>vier</item>
+        <item>vijf</item>
+        <item>zes</item>
     </string-array>
 </resources>

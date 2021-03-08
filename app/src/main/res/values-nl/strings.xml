@@ -44,40 +44,15 @@
     <!--Language Preference -->
     <string name="language_preference">Taal</string>
     <string name="language_preference_summary">Kies de taal van de app</string>
-    <string-array name="language_preference_names">
-        <item>Engels</item>
-        <item>Nederlands</item>
-    </string-array>
-
-    <string-array name="language_preference_values">
-        <item>en</item>
-        <item>nl</item>
-    </string-array>
 
     <!-- Color Preference -->
     <string name="color_preference">Kleur</string>
     <string name="color_preference_summary">Kies de hoofdkleur van de app</string>
-    <string-array name="color_preference_names">
-        <item>Rood</item>
-        <item>Groen</item>
-        <item>Blauw</item>
-    </string-array>
-
-    <string-array name="color_preference_values">
-        <item>#FF5733</item>
-        <item>#39FF33</item>
-        <item>#334FFF</item>
-    </string-array>
 
     <string name="share_intro">Kijk dit is mijn pokemon team uit de \"%1$s\". Mijn team heeft %2$s pokemon:\n</string>
     <string name="share_ending">\nDownload de app ook om je eigen team te maken!</string>
     <string name="share_empty">Ik heb geen pokemon in mijn team :(</string>
-    <string-array name="share_numbers">
-        <item>een</item>
-        <item>twee</item>
-        <item>drie</item>
-        <item>vier</item>
-        <item>vijf</item>
-        <item>zes</item>
-    </string-array>
+
+    <string name="colorpicker_button_select">Selecteer</string>
+    <string name="colorpicker_error">Hex Code is incorrect</string>
 </resources>
