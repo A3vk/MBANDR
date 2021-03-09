@@ -10,6 +10,9 @@
     <string name="pokemon_detail_menu_add">Add</string>
     <string name="team_menu_share">Share</string>
     <string name="team_no_pokemon">There are currently no pokemon in your team!</string>
+    <string name="profile_menu_add">Add</string>
+    <string name="pokemon_create_select_image">Select Image</string>
+    <string name="camera_take_photo">Take Photo</string>
     <string name="placeholder">{{PLACEHOLDER}}</string>
 
     <!--Pokemon Stat Names -->

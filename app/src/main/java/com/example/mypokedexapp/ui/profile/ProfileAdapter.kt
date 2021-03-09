@@ -17,14 +17,14 @@ import com.example.mypokedexapp.models.Pokemon
 import com.example.mypokedexapp.ui.profile.ProfileAdapter.ProfileViewHolder
 import com.example.mypokedexapp.utils.ImageHelper
 
-class ProfileAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon, ProfileViewHolder>(PokemonCompacter()) {
+class ProfileAdapter : ListAdapter<Pokemon, ProfileViewHolder>(PokemonCompacter()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
         return ProfileViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
         val current = getItem(position)
-        holder.bind(current, imageLoader)
+        holder.bind(current)
     }
 
     class ProfileViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -39,7 +39,7 @@ class ProfileAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon
             }
         }
 
-        fun bind(pokemon: Pokemon, imageLoader: ImageLoader) {
+        fun bind(pokemon: Pokemon) {
             pokemonNumber = pokemon.number
             pokemonName.text = "# ${pokemon.number} ${pokemon.name}"
 
