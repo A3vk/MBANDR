@@ -15,6 +15,7 @@ open class SwipeToDeleteCallback(context: Context): ItemTouchHelper.SimpleCallba
     private val background = ColorDrawable()
     private val backgroundColor = context.resources.getColor(R.color.team_delete_color, context.theme)
 
+    // Oude code, doet niks hebben we ook niet meer nodig. Hier is helaas overheen gekeken
     override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
         if (viewHolder.adapterPosition == 10) return 0
         return super.getMovementFlags(recyclerView, viewHolder)
@@ -46,10 +47,12 @@ open class SwipeToDeleteCallback(context: Context): ItemTouchHelper.SimpleCallba
             return
         }
 
+        // Maak de achtergrond rood
         background.color = backgroundColor
         background.setBounds(itemView.right + dX.toInt(), itemView.top, itemView.right, itemView.bottom)
         background.draw(c)
 
+        // Toon het icoontje op de achtergrond
         val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
         val deleteIconMargin = (itemHeight - intrinsicHeight) / 2
         val deleteIconLeft = itemView.right - deleteIconMargin - intrinsicWidth

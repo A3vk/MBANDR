@@ -15,6 +15,7 @@ class PokemonDetailViewModel(private val pokemonRepository: PokemonRepository) :
     private val _pokemon = MutableLiveData<Pokemon>()
 
     fun setPokemon(id: Int) {
+        // Bepaal of je een custom pokemon of een api pokemon moet ophalen
         if (id < 0 ){
             viewModelScope.launch {
                 _pokemon.apply{

@@ -24,12 +24,17 @@ class PokedexViewModel(private val pokemonRepository: PokemonRepository): ViewMo
     fun getNextPokemon() {
         if (totalPokemon == _pokemon.value?.count()) {
             _pokemon.apply {
+                // Vraag de gegevens op, je krijgt ze 1 pokemon per keer terug
                 pokemonRepository.getPokemonList(totalPokemon) { pokemon ->
+                    // Voeg de pokemon toe aan de lijst en sorteer de lijst
                     value?.add(pokemon)
                     value?.sort()
+
+                    // Dit wordt gedaan zodat de lijst refreshed
                     value = value
                 }
             }
+            // Bij houden vanaf welke pokemon de volgende lijst moet zijn
             totalPokemon += offset
         }
     }

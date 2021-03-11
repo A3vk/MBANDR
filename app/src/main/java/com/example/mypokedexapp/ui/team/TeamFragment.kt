@@ -30,11 +30,16 @@ class TeamFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.team_menu_share -> {
+                // Maak de share intent
                 val intent: Intent = Intent().apply {
+                    // Data versturen
                     action = Intent.ACTION_SEND
+                    // Dit is de tekst die je wil versturen
                     putExtra(Intent.EXTRA_TEXT, pokemonShareText)
+                    // Je wil tekst versturen
                     type = "text/plain"
                 }
+                // Start het delen van de tekst
                 val shareIntent = Intent.createChooser(intent, null)
                 startActivity(shareIntent)
                 true
@@ -50,6 +55,7 @@ class TeamFragment : Fragment() {
         recyclerview.adapter = adapter
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
 
+        // Het deleten van de pokemon uit het team
         val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 teamViewModel.removePokemonFromTeam(viewHolder.adapterPosition)
@@ -61,7 +67,8 @@ class TeamFragment : Fragment() {
         teamViewModel.pokemonTeam.observe(viewLifecycleOwner) { pokemon ->
             pokemon.let { adapter.submitList(ArrayList(it)) }
 
-            if(!pokemon.isEmpty()) {
+            // Stel de share text in
+            if(pokemon.isNotEmpty()) {
                 pokemonShareText = getString(R.string.share_intro, getString(R.string.app_name), resources.getStringArray(R.array.share_numbers)[pokemon.count() - 1])
                 pokemon.forEach {item ->
                     pokemonShareText += "\t${pokemon.indexOf(item) + 1}) # ${item.number}\t-\t${item.name}\n"

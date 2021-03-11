@@ -10,6 +10,7 @@ import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.Volley
 
 class BackendVolley(context: Context) {
+    // Singelton code
     companion object {
         @Volatile
         private var INSTANCE: BackendVolley? = null

@@ -15,7 +15,7 @@ class ServiceVolley(private val context: Context) : IServiceVolley {
                 completionHandler(response)
             },
             { error ->
-                Log.e("ServiceVolleyGet", "An error occurred: ${error.message}", error)
+                Log.w("ServiceVolleyGet", "An error occurred: ${error.message}", error)
                 completionHandler(null)
             }
         )
