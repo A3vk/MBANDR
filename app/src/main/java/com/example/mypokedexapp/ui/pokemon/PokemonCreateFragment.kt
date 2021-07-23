@@ -96,7 +96,6 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     pokemonFileName = ImageHelper.bitmapToBase64(bitmap)
                 }
             }
-
         }
 
         val imageFromGallery: Button = root.findViewById(R.id.image_from_directory_button)

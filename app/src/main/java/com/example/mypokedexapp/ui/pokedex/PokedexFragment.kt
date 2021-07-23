@@ -23,6 +23,8 @@ class PokedexFragment : Fragment() {
         val adapter = PokedexAdapter((activity?.application as PokemonApplication).imageLoader)
         recyclerview.adapter = adapter
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
+
+        // Infinite scrolling
         recyclerview.addOnScrollListener(object: RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -33,6 +35,7 @@ class PokedexFragment : Fragment() {
                     val pastVisibleItems = layoutManager.findFirstCompletelyVisibleItemPosition()
                     val total = adapter.itemCount
 
+                    // Als je vijftien items verwijderd bent van de laatste zullen de volgende 20 pokemon opgehaald worden
                     if((visibleItemCount + pastVisibleItems) >= (total - 15)){
                         pokedexViewModel.getNextPokemon()
                     }
@@ -40,6 +43,7 @@ class PokedexFragment : Fragment() {
             }
         })
 
+        // Om de live data bij te houden
         pokedexViewModel.pokemon.observe(viewLifecycleOwner) { pokemon ->
             if (pokemon.isNotEmpty()) {
                 pokemon.let { adapter.submitList(ArrayList(it)) }

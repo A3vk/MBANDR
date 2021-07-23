@@ -25,6 +25,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
     companion object {
+        // Cheat om Bitmap van camera naar create view te krijgen
         var bitmap: Bitmap? = null
     }
 
@@ -32,17 +33,21 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Setup prefs
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         sharedPref.registerOnSharedPreferenceChangeListener(this)
         updateColors(sharedPref)
 
+        // Setup bottom navigation
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
+        // Van het menu worden de items automatisch geconfigureerd
         val appBarConfiguration = AppBarConfiguration(navView.menu)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
    }
 
+    // Update the color scheme
     private fun updateColors(sharedPref: SharedPreferences) {
         setTopBarColor(sharedPref)
         setBottomMenuColor(sharedPref)
@@ -79,17 +84,20 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
         window.statusBarColor = ColorHelper.darken(Color.parseColor(sharedPref.getString(PreferenceKeys.COLOR, PreferenceKeys.DEFAULT_COLOR)), 0.2f)
     }
 
+    // Listen to pref changes
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when(key) {
             PreferenceKeys.COLOR -> {
                 updateColors(sharedPreferences!!)
             }
             PreferenceKeys.LANGUAGE -> {
+                // App wordt herstart om de taal verandering door te voeren
                 recreate()
             }
         }
     }
 
+    // Goede taal bij herstarten app
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(updateBaseContextLocale(base!!))
     }
@@ -103,7 +111,7 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
         return context.createConfigurationContext(configuration)
     }
 
-    // Handle back button press
+    // De functie om de back button in de toolbar te laten werken
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             android.R.id.home -> {

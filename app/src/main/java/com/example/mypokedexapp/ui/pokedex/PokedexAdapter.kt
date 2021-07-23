@@ -29,6 +29,7 @@ class PokedexAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon
         holder.bind(current, imageLoader)
     }
 
+    // Dit is een inner class om het bij elkaar te houden
     class PokedexViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var pokemonNumber = 0;
         private val pokemonName: TextView = itemView.findViewById(R.id.pokemonName)
@@ -36,6 +37,7 @@ class PokedexAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon
 
         init {
             itemView.setOnClickListener {
+                // Navigeer naar de pokemon met het id
                 itemView.findNavController().navigate(R.id.action_navigation_pokedex_to_navigation_pokemon_detail, bundleOf("pokemonNumber" to pokemonNumber))
             }
         }
@@ -49,8 +51,7 @@ class PokedexAdapter(private val imageLoader: ImageLoader) : ListAdapter<Pokemon
 
         companion object {
             fun create(parent: ViewGroup): PokedexViewHolder {
-                val view: View = LayoutInflater.from(parent.context).inflate(R.layout.pokemon_item, parent, false)
-                return PokedexViewHolder(view)
+                return PokedexViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.pokemon_item, parent, false))
             }
         }
     }

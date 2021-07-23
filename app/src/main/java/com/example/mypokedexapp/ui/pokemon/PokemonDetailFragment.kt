@@ -19,6 +19,7 @@ import com.android.volley.toolbox.NetworkImageView
 import com.example.mypokedexapp.PokemonApplication
 import com.example.mypokedexapp.R
 import com.example.mypokedexapp.utils.ImageHelper
+import com.example.mypokedexapp.values.PreferenceKeys
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -59,8 +60,9 @@ class PokemonDetailFragment : Fragment() {
             numberOfPokemonInTeam = it
         }
 
+        // Haal de kleuren settings op
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
-        val color = sharedPref.getString("color_preference", "#000000")
+        val color = sharedPref.getString(PreferenceKeys.COLOR, PreferenceKeys.DEFAULT_COLOR)
 
         // Get all View elements
         val imageView: NetworkImageView = root.findViewById(R.id.pokemonImage)

@@ -7,8 +7,8 @@ import com.example.mypokedexapp.volley.BackendVolley
 import com.example.mypokedexapp.volley.ServiceVolley
 
 class PokemonApplication: Application() {
-    val database by lazy { PokemonDatabase.getInstance(this) }
-    val service by lazy { ServiceVolley(this) }
+    private val database by lazy { PokemonDatabase.getInstance(this) }
+    private val service by lazy { ServiceVolley(this) }
     val imageLoader by lazy { BackendVolley.getInstance(this).imageLoader }
     val repository by lazy { PokemonRepository(database.pokemonDao(), service) }
 }

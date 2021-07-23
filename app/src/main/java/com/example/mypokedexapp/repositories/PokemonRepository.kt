@@ -16,9 +16,11 @@ class PokemonRepository(private val pokemonDao: PokemonDao, private val serviceV
             if (response != null) {
                 val result = response.getJSONArray("results")
                 for (index in 0 until result.length()) {
+                    // Als de json is opgehaald
                     serviceVolley.get(result.getJSONObject(index).getString("url")) { pokemonJson ->
                         if (pokemonJson != null) {
-                            completionHandler(Pokemon.fromJson(pokemonJson) )
+                            // Format en stuur terug naar caller
+                            completionHandler(Pokemon.fromJson(pokemonJson))
                         }
                     }
                 }
@@ -27,7 +29,7 @@ class PokemonRepository(private val pokemonDao: PokemonDao, private val serviceV
     }
 
     fun getPokemon(id: Number, completionHandler: (onComplete: Pokemon) -> Unit){
-        serviceVolley.get("${Endpoints.Pokemon.BASE}$id") { response ->
+        serviceVolley.get(Endpoints.Pokemon.BASE, id.toString()) { response ->
             if (response != null) {
                 completionHandler(Pokemon.fromJson(response))
             }
