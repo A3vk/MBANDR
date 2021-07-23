@@ -31,7 +31,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_profile, container, false)
         val recyclerview = root.findViewById<RecyclerView>(R.id.recycler_view_pokemon)
-        val adapter = ProfileAdapter((activity?.application as PokemonApplication).imageLoader)
+        val adapter = ProfileAdapter()
         recyclerview.adapter =adapter
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
 

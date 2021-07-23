@@ -1,7 +1,10 @@
 package com.example.mypokedexapp.ui.pokemon
 
+import android.Manifest
+import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
@@ -13,6 +16,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,15 +28,12 @@ import com.example.mypokedexapp.PokemonApplication
 import com.example.mypokedexapp.R
 import com.example.mypokedexapp.models.Pokemon
 import com.example.mypokedexapp.models.Type
+import com.example.mypokedexapp.ui.camera.CameraFragment
 import com.example.mypokedexapp.utils.ImageHelper
 import java.io.*
 
 
 class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
-    companion object{
-        const val PICK_IMAGE = 1
-    }
-
     private val pokemonCreateViewModel: PokemonCreateViewModel by viewModels {
         PokemonCreateViewModelFactory((activity?.application as PokemonApplication).repository)
     }
@@ -81,6 +85,20 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
         secondaryTypeSpinner.onItemSelectedListener = this
 
+        val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                var bitmap = getBitmap(result.data?.data!!)
+                if(bitmap != null) {
+                    val matrix = Matrix()
+                    matrix.postRotate(90F)
+                    bitmap = Bitmap.createBitmap(bitmap, bitmap.width / 2 - 250, bitmap.height / 2 - 250, 500, 500, matrix, false)
+                    pokemonImage.setImageBitmap(bitmap)
+                    pokemonFileName = ImageHelper.bitmapToBase64(bitmap)
+                }
+            }
+
+        }
+
         val imageFromGallery: Button = root.findViewById(R.id.image_from_directory_button)
         imageFromGallery.setOnClickListener {
             val getIntent = Intent(Intent.ACTION_GET_CONTENT)
@@ -89,14 +107,27 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
             val pickIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             pickIntent.type = "image/*"
 
-            val chooserIntent = Intent.createChooser(getIntent, "Select Image")
-            chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(pickIntent))
+            val chooserIntent = Intent.createChooser(pickIntent, getString(R.string.pokemon_create_select_image))
+            chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(getIntent))
 
-            startActivityForResult(chooserIntent, PICK_IMAGE)
+            getContent.launch(chooserIntent)
         }
+
+        val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                findNavController().navigate(R.id.action_navigation_pokemon_create_to_fragment_camera)
+            } else {
+                Toast.makeText(requireContext(), resources.getString(R.string.camera_permission_error), Toast.LENGTH_SHORT ).show()
+            }
+        }
+
         val imageFromCamera: Button = root.findViewById(R.id.image_from_camera_button)
         imageFromCamera.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_pokemon_create_to_fragment_camera)
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                findNavController().navigate(R.id.action_navigation_pokemon_create_to_fragment_camera)
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+            }
         }
         return root
     }
@@ -149,42 +180,20 @@ class PokemonCreateFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK){
-            when(requestCode){
-                PICK_IMAGE -> setCustomPokemonImage(data)
-            }
-        }
-    }
-
-    private fun setCustomPokemonImage(data: Intent?){
-        if(data == null){
-            return
-        }
-
-        val uri = data.data
-        var bitmap = getBitmap(uri!!)!!
-        val matrix = Matrix()
-        matrix.postRotate(90F)
-        bitmap = Bitmap.createBitmap(bitmap, bitmap.width / 2 - 250, bitmap.height / 2 - 250, 500, 500, matrix, false)
-        pokemonImage.setImageBitmap(bitmap)
-        pokemonFileName = ImageHelper.bitmapToBase64(bitmap)
-    }
-
-    private fun getBitmap(uri: Uri): Bitmap? {
+    private fun getBitmap(uri: Uri?): Bitmap? {
         var bitmap: Bitmap ?= null
         try {
-            val inputStream = requireContext().contentResolver.openInputStream(uri)
+            val inputStream = requireContext().contentResolver.openInputStream(uri!!)
             bitmap = BitmapFactory.decodeStream(inputStream)
-            // close stream
             try {
                 inputStream?.close()
             } catch (e: IOException) {
                 e.printStackTrace()
             }
 
-        }catch (e: FileNotFoundException){}
+        }catch (e: FileNotFoundException){
+            Log.w("PokemonCreateFragment", "Failed to create bitmap: ${e.message}", e)
+        }
 
         return bitmap
     }

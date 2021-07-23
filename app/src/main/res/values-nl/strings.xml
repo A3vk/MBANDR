@@ -11,6 +11,9 @@
     <string name="pokemon_detail_menu_add">Toevoegen</string>
     <string name="team_menu_share">Delen</string>
     <string name="team_no_pokemon">Er bevinden zich op dit moment geen pokemon in je team!</string>
+    <string name="profile_menu_add">Toevoegen</string>
+    <string name="pokemon_create_select_image">Selecteer Afbeelding</string>
+    <string name="camera_take_photo">Foto maken</string>
     <string name="placeholder">{{PLACEHOLDER}}</string>
 
     <!--Pokemon Stat Names -->
@@ -66,4 +69,6 @@
 
     <string name="colorpicker_button_select">Selecteer</string>
     <string name="colorpicker_error">Hex Code is incorrect</string>
+
+    <string name="camera_permission_error">De rechten zijn niet toegekend door de gebruiker.</string>
 </resources>

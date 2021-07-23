@@ -48,36 +48,12 @@ class CameraFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_camera, container, false)
         val captureButton: Button = root.findViewById(R.id.camera_capture_button)
         cameraLiveFeed = root.findViewById(R.id.camera_live_feed)
-        if (allPermissionsGranted()) {
-            startCamera()
-        } else {
-            ActivityCompat.requestPermissions(
-                requireActivity(), REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
-            )
-        }
+        startCamera()
 
         captureButton.setOnClickListener { takePhoto() }
         cameraExecutor = Executors.newSingleThreadExecutor()
 
         return root
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<String>, grantResults:
-        IntArray
-    ) {
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (allPermissionsGranted()) {
-                startCamera()
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    "Permissions not granted by the user.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                requireActivity().finish()
-            }
-        }
     }
 
     private fun takePhoto() {
@@ -137,10 +113,6 @@ class CameraFragment : Fragment() {
         }, ContextCompat.getMainExecutor(requireContext()))
 
         imageCapture = ImageCapture.Builder().build()
-    }
-
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
 
     override fun onDestroy() {
